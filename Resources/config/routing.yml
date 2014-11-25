@@ -1,0 +1,3 @@
+skautis_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: SkautisBundle:Default:index }
