@@ -5,7 +5,7 @@
 	"php": ">=5.3",
 	"psr/log": "~1.0",
         "skautis/skautis": "*",
-	"symfony/framework-bundle": "dev-master"
+	"symfony/framework-bundle": "*"
     },
     "autoload": {
 	"psr-4": { "SkautisBundle\\": "" }
