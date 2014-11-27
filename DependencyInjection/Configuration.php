@@ -20,9 +20,22 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('skautis');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+	$rootNode->children()
+	    ->scalarNode('app_id')
+                ->isRequired()
+	    ->end()
+            ->booleanNode('test_mode')
+		->defaultValue(true)
+		->isRequired()
+	    ->end()
+	    ->booleanNode('profiler')
+		->defaultValue(false)
+	    ->end()
+	    ->booleanNode('compression')
+		->defaultValue(true)
+	    ->end();
+
+
 
         return $treeBuilder;
     }
