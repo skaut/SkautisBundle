@@ -31,9 +31,6 @@ class Configuration implements ConfigurationInterface
 	    ->booleanNode('profiler')
 		->defaultValue(false)
 	    ->end()
-	    ->scalarNode('ws_factory_class')
-	    	->defaultValue('Skautis\\Factory\\BasicWSFactory')
-            ->end()
 	    ->booleanNode('compression')
 		->defaultValue(true)
 	    ->end();

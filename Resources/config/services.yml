@@ -1,7 +1,22 @@
 parameters:
-#    skautis.example.class: Jinora\SkautisBundle\Example
+    skautis.skautis_class: 'SkautIS\SkautIS'
+    skautis.ws_factory_class: 'SkautIS\Factory\BasicWSFactory'
+    skautis.skautis_factory_class: 'SkautIS\SkautIS'
+    skautis.skautis_factory_method: 'getInstance'
 
 services:
-#    skautis.example:
-#        class: %skautis.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    skautis.ws_factory:
+        class: "%skautis.ws_factory_class%"
+
+    skautis.skautis_factory:
+        class: "%skautis.skautis_factory_class%"
+
+    skautis:
+        class: "%skautis.skautis_class%"
+        factory_service: skautis.skautis_factory
+        factory_method: get
+        arguments:
+            - "%skautis.app_id%"
+            - "%skautis.test_mode%"
+            - "%skautis.profiler%"
+            - "@skautis.ws_factory"
