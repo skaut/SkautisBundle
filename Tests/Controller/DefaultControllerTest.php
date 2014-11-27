@@ -1,6 +1,6 @@
 <?php
 
-namespace Jinora\SkautisBundle\Tests\Controller;
+namespace SkautisBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

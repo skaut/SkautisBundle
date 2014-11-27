@@ -1,6 +1,6 @@
 <?php
 
-namespace Jinora\SkautisBundle;
+namespace SkautisBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

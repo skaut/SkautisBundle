@@ -1,6 +1,6 @@
 <?php
 
-namespace Jinora\SkautisBundle\DependencyInjection;
+namespace SkautisBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

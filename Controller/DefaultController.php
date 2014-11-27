@@ -1,6 +1,6 @@
 <?php
 
-namespace Jinora\SkautisBundle\Controller;
+namespace SkautisBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
