@@ -1,5 +1,5 @@
 {
-    "name": "jp/skautis-bundle",
+    "name": "skautis/skautis-bundle",
     "description": "Bundle for Skautis integration",
     "require": {
 	"php": ">=5.3",

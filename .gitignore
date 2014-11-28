@@ -1,6 +1,3 @@
-phpunit.xml
 vendor
 composer.lock
 composer.phar
-Tests
-README.md
