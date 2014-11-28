@@ -6,8 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('SkautisBundle:Default:index.html.twig', array('name' => $name));
+
+	$skautIS = $this->get('skautis');
+
+
+        return $skautis->getLoginUrl();
     }
 }

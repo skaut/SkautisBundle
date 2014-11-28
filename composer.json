@@ -4,8 +4,8 @@
     "require": {
 	"php": ">=5.3",
 	"psr/log": "~1.0",
-        "skautis/skautis": "*",
-	"symfony/framework-bundle": "dev-master"
+        "skautis/skautis": "2.*@dev",
+	"symfony/framework-bundle": "*"
     },
     "autoload": {
 	"psr-4": { "SkautisBundle\\": "" }

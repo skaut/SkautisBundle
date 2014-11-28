@@ -1,17 +1,16 @@
 <?php
 
-namespace SkautisBundle\Tests\Controller;
+namespace SkautisBundle\Tests\Service;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use SkautisBundle\Tests\KernelAwareTest;
 
-class DefaultControllerTest extends WebTestCase
+class ServiceTest extends KernelAwareTest
 {
-    public function testIndex()
+    public function testSkautisService()
     {
-        $client = static::createClient();
+       $skautIS = $this->container->get('skautis');
+       $loginUrl = $skautIS->getLoginUrl();
 
-        $crawler = $client->request('GET', '/hello/Fabien');
-
-        $this->assertTrue($crawler->filter('html:contains("Hello Fabien")')->count() > 0);
+	$this->assertContains('http://', $loginUrl);
     }
 }
