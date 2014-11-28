@@ -1,8 +1,8 @@
 parameters:
     skautis.skautis_class: 'SkautIS\SkautIS'
     skautis.ws_factory_class: 'SkautIS\Factory\BasicWSFactory'
-    skautis.skautis_factory_class: 'SkautIS\SkautIS'
-    skautis.skautis_factory_method: 'getInstance'
+    skautis.skautis_factory_class: 'SkautisBundle\Factory\BasicSkautISFactory'
+    skautis.session_adapter_class: 'SkautisBundle\SessionAdapter'
 
 services:
     skautis.ws_factory:
@@ -10,6 +10,11 @@ services:
 
     skautis.skautis_factory:
         class: "%skautis.skautis_factory_class%"
+
+    skautis.session_adapter:
+        class: "%skautis.session_adapter_class%"
+        arguments:
+            - @session
 
     skautis:
         class: "%skautis.skautis_class%"
@@ -19,4 +24,7 @@ services:
             - "%skautis.app_id%"
             - "%skautis.test_mode%"
             - "%skautis.profiler%"
-            - "@skautis.ws_factory"
+            - "%skautis.compression%"
+            - @skautis.session_adapter
+            - @skautis.ws_factory
+
