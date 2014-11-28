@@ -1,6 +1,8 @@
 {
     "name": "skautis/skautis-bundle",
     "description": "Bundle for Skautis integration",
+    "keywords": ["skautis", "symfony", "bundle"],
+    "type": "library",
     "require": {
 	"php": ">=5.3",
 	"psr/log": "~1.0",

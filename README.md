@@ -8,6 +8,7 @@ Pridejte zavislost do [composeru](https://getcomposer.org/doc/00-intro.md)
 composer require "skautis/skautis-bundle": "*@dev";
 ```
 Upravte soubor app/AppKernell.php
+```
 $bundle = array(
  // Nejaky kod tu uz bude
  // Nasledujici radek je potreba dopsat
