@@ -46,3 +46,18 @@ Spusteni:
 cd "Muj/Symfony/Projekt/Root";
 phpunit -c app /vendor/skautis/skautis_bundle/Tests;
 ```
+
+
+##Verze PHP
+Pozadovanou verzi PHP najdete v [composer.json](./composer.json)
+
+
+###Minimalni verze PHP
+Je shodna s [lebeda.skauting.cz](http://lebeda.skauting.cz/technicke_informace.php#php). Pokud tomu tak neni vytvorte issue nebo napiste email spravci repozitare.
+
+###Verzovani balucku
+Abyste predesli problemum s verzovanim doporucuji peclive volit verze pozadovane v composer.json.
+Pro aplikace v produkcnim nasazeni **durazne nedoporucuji pouzivat omezeni typu "*@dev" "*" ">=2" ">=2.0" "2.0@dev"**
+Naopak vhodny je vyraz typu "2.0.*"
+
+[Vice informaci o verzovani](http://semver.org/)
