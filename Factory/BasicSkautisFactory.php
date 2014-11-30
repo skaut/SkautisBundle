@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Factory class for SkautIS
+ * Factory class for Skautis
  *
  * @author Jindrich Pilar <pilar.jindrich@gmail.com>
  */
 
 namespace SkautisBundle\Factory;
 
-use SkautIS\SkautIS;
-use SkautIS\Factory\WSFactory;
-use SkautIS\SessionAdapter\AdapterInterface;
+use Skautis\Skautis;
+use Skautis\Factory\WSFactory;
+use Skautis\SessionAdapter\AdapterInterface;
 
 /**
- * This class is used to create SkautIS objects
+ * This class is used to create Skautis objects
  */
-class BasicSkautISFactory extends SkautISFactory
+class BasicSkautisFactory extends SkautisFactory
 {
 
 
@@ -24,7 +24,7 @@ class BasicSkautISFactory extends SkautISFactory
      */
     public function get($appId, $testMode, $profiler, $compression, AdapterInterface $sessionAdapter, WSFactory $wsFactory)
     {
-        $skautIS = SkautIS::getInstance($appId, $testMode, $profiler, $sessionAdapter, $wsFactory);
+        $skautIS = Skautis::getInstance($appId, $testMode, $profiler, $sessionAdapter, $wsFactory);
         $skautIS->setCompression($compression);
 
 	return $skautIS;

@@ -2,11 +2,11 @@
 
 namespace SkautisBundle;
 
-use SkautIS\SessionAdapter\AdapterInterface;
+use Skautis\SessionAdapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * Adapter pro pouziti Symfony Session ve SkautISu
+ * Adapter pro pouziti Symfony Session ve Skautisu
  */
 class SessionAdapter implements AdapterInterface
 {
