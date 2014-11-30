@@ -1,7 +1,7 @@
 parameters:
-    skautis.skautis_class: 'SkautIS\SkautIS'
-    skautis.ws_factory_class: 'SkautIS\Factory\BasicWSFactory'
-    skautis.skautis_factory_class: 'SkautisBundle\Factory\BasicSkautISFactory'
+    skautis.skautis_class: 'Skautis\Skautis'
+    skautis.ws_factory_class: 'Skautis\Factory\BasicWSFactory'
+    skautis.skautis_factory_class: 'SkautisBundle\Factory\BasicSkautisFactory'
     skautis.session_adapter_class: 'SkautisBundle\SessionAdapter'
 
 services:
