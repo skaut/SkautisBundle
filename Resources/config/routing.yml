@@ -1,3 +1,24 @@
-skautis_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: SkautisBundle:Default:index }
+skautis_login:
+    path:     /skautis_login
+    defaults: { _controller: SkautisBundle:Auth:login }
+    methods:  [GET]
+
+skautis_login_confirm:
+    path:     /skautis_login
+    defaults: { _controller: SkautisBundle:Auth:loginConfirm }
+    methods:  [POST]
+
+skautis_logout:
+    path:     /skautis_logout
+    defaults: { _controller: SkautisBundle:Auth:logout }
+    methods:  [GET]
+
+skautis_logout_confirm:
+    path:     /skautis_logout
+    defaults: { _controller: SkautisBundle:Auth:logoutConfirm }
+    methods:  [POST]
+
+skautis_register:
+    path:     /skautis_register
+    defaults: { _controller: SkautisBundle:Auth:register }
+    methods:  [GET]
