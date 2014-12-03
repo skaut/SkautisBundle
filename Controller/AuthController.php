@@ -18,7 +18,6 @@ class AuthController extends Controller
     {
 
 	$loginUrl = $this->get('skautis')->getLoginUrl();
-
         return $this->redirect($loginUrl);
     }
 
@@ -29,15 +28,13 @@ class AuthController extends Controller
     {
 
         $skautis = $this->get('skautis');
-
-        $skautis->setToken($request->request->get('skautIS_Token'));
-        $skautis->setRoleId($request->request->get('skautIS_IDRole'));
-        $skautis->setUnitId($request->request->get('skautIS_IDUnit'));
+        $skautis->setLoginData($request->request->all());
 
 
-        //@TODO Kontrola ze data opravdu posila skautis
-	//Nestaci referer/ip odesilatele, je potreba spustit SOAP request vyzadujici login
-
+	if (!$skautis->isLoggedIn()) {
+	    $skautis->resetLoginData();
+	    return $this->redirect($skautis->getLoginUrl());
+	}
 
         $this->addFlash('notice', 'Byl/a jste prihlasena');
         return $this->redirectToRoute("homepage");
@@ -50,7 +47,6 @@ class AuthController extends Controller
     {
 
 	$logoutUrl = $this->get('skautis')->getLogoutUrl();
-
         return $this->redirect($logoutUrl);
     }
 
@@ -72,7 +68,6 @@ class AuthController extends Controller
     {
 
 	$registerUrl = $this->get('skautis')->getRegisterUrl();
-
         return $this->redirect($registerUrl);
     }
 }
