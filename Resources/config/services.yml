@@ -1,15 +1,11 @@
 parameters:
     skautis.skautis_class: 'Skautis\Skautis'
     skautis.ws_factory_class: 'Skautis\Factory\BasicWSFactory'
-    skautis.skautis_factory_class: 'SkautisBundle\Factory\BasicSkautisFactory'
     skautis.session_adapter_class: 'SkautisBundle\SessionAdapter'
 
 services:
     skautis.ws_factory:
         class: "%skautis.ws_factory_class%"
-
-    skautis.skautis_factory:
-        class: "%skautis.skautis_factory_class%"
 
     skautis.session_adapter:
         class: "%skautis.session_adapter_class%"
@@ -18,13 +14,11 @@ services:
 
     skautis:
         class: "%skautis.skautis_class%"
-        factory_service: skautis.skautis_factory
-        factory_method: get
         arguments:
             - "%skautis.app_id%"
             - "%skautis.test_mode%"
             - "%skautis.profiler%"
-            - "%skautis.compression%"
             - @skautis.session_adapter
             - @skautis.ws_factory
-
+        calls:
+            - [setCompression, ["%skautis.compression%"]]
