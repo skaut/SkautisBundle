@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
 		->isRequired()
 	    ->end()
 	    ->booleanNode('profiler')
-		->defaultValue(false)
+		->defaultValue('%kernel.debug%')
 	    ->end()
 	    ->booleanNode('compression')
 		->defaultValue(true)
