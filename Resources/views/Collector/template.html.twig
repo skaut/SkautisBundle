@@ -1,0 +1,120 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% import _self as m %}
+
+{% block toolbar %}
+    <div class="sf-toolbar-block">
+        <div class="sf-toolbar-icon">
+            <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
+                Skautis
+                <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getRequestCount() }}</span>
+            </a>
+        </div>
+        <div class="sf-toolbar-info">
+            <div class="sf-toolbar-info-piece">
+                <b>Pocet pozadavku na server</b>
+                <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getRequestCount() }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Celkovy cas pozadavku</b>
+                <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{#{% block head %}#}
+    {# if the web profiler panel needs some specific JS or CSS files #}
+{#{% endblock %}#}
+
+
+{% block menu %}
+    <span class="label">
+        {#<span class="icon"><img src="" alt="" /></span>#}
+        <strong>Skautis</strong>
+        <span class="count">
+            <span>{{ collector.getRequestCount() }}</span>
+            <span>{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</span>
+        </span>
+    </span>
+{% endblock %}
+
+{% block panel %}
+   <h2>Skautis - pozadavky na server</h2>
+
+   <table>
+     <tr>
+       <th>Pocet pozadavku celkem</th>
+       <td>{{ collector.getRequestCount() }}</td>
+     </tr>
+     <tr>
+       <th>Celkovy cas</th>
+       <td>{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</td>
+     </tr>
+     <tr>
+       <th>App id</th>
+       <td>{{ collector.app_id }}</td>
+     </tr>
+     <tr>
+       <th>Test mode</th>
+       <td>{{ collector.test_mode ? 'Yes':'No' }}</td>
+     </tr>
+     <tr>
+       <th>Profiling</th>
+       <td>{{ collector.profiling_enabled ? 'Yes':'No' }}</td>
+     </tr>
+     <tr>
+       <th>Komprese</th>
+       <td>{{ collector.compression ? 'Yes':'No' }}</td>
+     </tr>
+     <tr>
+       <th>Role ID</th>
+       <td>{{ collector.role_id }}</td>
+     </tr>
+     <tr>
+       <th>Unit ID</th>
+       <td>{{ collector.unit_id }}</td>
+     </tr>
+     <tr>
+       <th>token</th>
+       <td>{{ collector.token }}</td>
+     </tr>
+     <tr>
+       <th>Je uzivatel prihlasen</th>
+       <td>{{ collector.is_logged_in ? 'Yes':'No' }}</td>
+     </tr>
+     <tr>
+       <th>Datum a cas odhlaseni</th>
+       <td>{{ collector.logout_date | date}}</td>
+     </tr>
+   </table>
+
+   {% for req in collector.getRequests() %}
+     {{ m.request(req.fname, req.args, req.trace, req.time, req.result) }}
+   {% else %}
+       <p>Zadne pozadavky na server nebyly zasalny</p>
+   {% endfor %}
+{% endblock %}
+
+{% macro request(fname, args, trace, time, result) %}
+
+  <h3>{{fname}}</h3>
+  <p><b>Cas:</b> {{ (time * 1000) | number_format(2, '.', ',')  }} ms</p>
+
+  <h4>Argumenty</h4>
+  <pre>
+   {{ dump(args) }}
+  </pre>
+
+  <h4>Response</h4>
+  <pre>
+   {{ dump(result) }}
+  </pre>
+
+  <h4>Stacktrace</h4>
+  <pre>
+   {{ dump(trace) }}
+  </pre>
+  <hr>
+{% endmacro %}

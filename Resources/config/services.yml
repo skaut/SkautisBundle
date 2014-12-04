@@ -2,6 +2,7 @@ parameters:
     skautis.skautis_class: 'Skautis\Skautis'
     skautis.ws_factory_class: 'Skautis\Factory\BasicWSFactory'
     skautis.session_adapter_class: 'SkautisBundle\SessionAdapter'
+    skautis.data_collector_class: 'SkautisBundle\SkautisDataCollector'
 
 services:
     skautis.ws_factory:
@@ -22,3 +23,10 @@ services:
             - @skautis.ws_factory
         calls:
             - [setCompression, ["%skautis.compression%"]]
+
+    data_collector.skautis_collector:
+        class: "%skautis.data_collector_class%"
+        arguments:
+            - @skautis
+        tags:
+            - { name: data_collector, template: "SkautisBundle:Collector:template", id: "skautis_collector"}
