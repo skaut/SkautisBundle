@@ -1,6 +1,6 @@
 <?php
 
-namespace SkautisBundle;
+namespace SkautisBundle\Profiler;
 
 use Skautis\Skautis;
 use Skatis\SkautisQuery;

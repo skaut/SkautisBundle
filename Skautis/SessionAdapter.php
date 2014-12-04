@@ -1,6 +1,6 @@
 <?php
 
-namespace SkautisBundle;
+namespace SkautisBundle\Skautis;
 
 use Skautis\SessionAdapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
