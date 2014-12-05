@@ -15,7 +15,7 @@ class SkautisDataCollector extends DataCollector
     /**
      * @var Skautis
      */
-    protected $queries;
+    protected $skautis;
 
     public function __construct(Skautis $skautis)
     {

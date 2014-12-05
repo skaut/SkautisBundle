@@ -2,7 +2,7 @@
 
 namespace Test\SkautisBundle;
 
-use SkautisBundle\SessionAdapter as SymfonyAdapter;
+use SkautisBundle\Skautis\SessionAdapter as SymfonyAdapter;
 
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\HttpFoundation\Session\Session as SymfonySession;
