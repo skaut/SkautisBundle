@@ -46,10 +46,16 @@ class StopwatchWS extends WS
         $name = $this->getWatchName($function_name);
 	$this->stopwatch->start($name, "skautis");
 
-	$result = $this->__soapCall($function_name, $arguments);
+	try {
+            $result = $this->__soapCall($function_name, $arguments);
+	}
+	catch (\Exception $e) {
+	    throw $e;
+	}
+	finally {
+	    $this->stopwatch->stop($name);
+	}
 
-
-	$this->stopwatch->stop($name);
 	return $result;
     }
 
