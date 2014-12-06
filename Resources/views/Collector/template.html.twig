@@ -91,30 +91,44 @@
    </table>
 
    {% for req in collector.getRequests() %}
-     {{ m.request(req.fname, req.args, req.trace, req.time, req.result) }}
+     {{ m.request(req.fname, req.args, req.trace, req.time, req.result, req.hasFailed, req.exception) }}
    {% else %}
        <p>Zadne pozadavky na server nebyly zasalny</p>
    {% endfor %}
 {% endblock %}
 
-{% macro request(fname, args, trace, time, result) %}
+{% macro request(fname, args, trace, time, result, failure, exception) %}
 
   <h3>{{fname}}</h3>
   <p><b>Cas:</b> {{ (time * 1000) | number_format(2, '.', ',')  }} ms</p>
+
+  <h4>Uspech</h4>
+  <p>{{ failure ? 'No':'Yes' }}</p>
+
+  {% if not failure %}
+    <h4>Response</h4>
+    <pre>
+     {{ dump(result) }}
+    </pre>
+  {% else %}
+    <h4>Chyba</h4>
+    <pre>
+     {{ dump(exception) }}
+    </pre>
+  {% endif %}
+
 
   <h4>Argumenty</h4>
   <pre>
    {{ dump(args) }}
   </pre>
 
-  <h4>Response</h4>
-  <pre>
-   {{ dump(result) }}
-  </pre>
 
   <h4>Stacktrace</h4>
   <pre>
    {{ dump(trace) }}
   </pre>
+
   <hr>
+
 {% endmacro %}
