@@ -26,6 +26,7 @@ services:
             - "%skautis.profiler%"
             - @skautis.session_adapter
             - @skautis.ws_factory
+            - "%skautis.cache%"
         calls:
             - [setCompression, ["%skautis.compression%"]]
 
@@ -35,3 +36,4 @@ services:
             - @skautis
         tags:
             - { name: data_collector, template: "SkautisBundle:Collector:template", id: "skautis_collector"}
+

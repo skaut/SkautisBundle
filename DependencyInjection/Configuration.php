@@ -32,7 +32,10 @@ class Configuration implements ConfigurationInterface
 		->defaultValue('%kernel.debug%')
 	    ->end()
 	    ->booleanNode('compression')
-		->defaultValue(true)
+                ->defaultValue(true)
+	    ->end()
+	    ->booleanNode('cache')
+		->defaultValue(false)
 	    ->end();
 
 
