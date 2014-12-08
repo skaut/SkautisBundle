@@ -45,16 +45,20 @@
 
    <table>
      <tr>
-       <th>Pocet pozadavku celkem</th>
-       <td>{{ collector.getRequestCount() }}</td>
-     </tr>
-     <tr>
-       <th>Celkovy cas</th>
-       <td>{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</td>
+       <th>Maintenance</th>
+       <td>{{ collector.maintenance ? 'Yes' : 'False' }}</td>
      </tr>
      <tr>
        <th>App id</th>
        <td>{{ collector.app_id }}</td>
+     </tr>
+   {% if not collector.maintenance %}
+     <tr>
+       <th>Pocet pozadavku celkem</th>
+       <td>{{ collector.getRequestCount() }}</td>
+     </tr>
+       <th>Celkovy cas</th>
+       <td>{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</td>
      </tr>
      <tr>
        <th>Test mode</th>
@@ -92,6 +96,7 @@
        <th>Datum a cas odhlaseni</th>
        <td>{{ collector.logout_date | date}}</td>
      </tr>
+   {% endif %}
    </table>
 
    {% for req in collector.getRequests() %}
