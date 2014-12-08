@@ -35,6 +35,7 @@ class SkautisDataCollector extends DataCollector
 	    'token' => $this->skautis->getToken(),
 	    'is_logged_in' => $this->skautis->isLoggedIn(),
 	    'logout_date' => $this->skautis->getLogoutDate(),
+	    'cache' => $this->skautis->isCacheEnabled(),
         );
     }
 
