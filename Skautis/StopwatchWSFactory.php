@@ -28,9 +28,9 @@ class StopwatchWSFactory extends BasicWSFactory
    /**
     * @inheritdoc
     */
-    public function createWS($wsdl, array $init, $compression, $profiler)
+    public function createWS($wsdl, array $init)
     {
-        $ws = new $this->class($wsdl, $init, $compression, $profiler);
+        $ws = new $this->class($wsdl, $init);
 
 	if ($this->stopwatch !== null) {
 	    $ws->setStopwatch($this->stopwatch);

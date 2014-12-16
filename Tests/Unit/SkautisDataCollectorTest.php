@@ -1,21 +1,39 @@
 <?php
 
 use Skautis\Skautis;
+use Skautis\Config;
+use Skautis\SessionAdapter\FakeAdapter;
+use Skautis\WsdlManager;
+use Skautis\Factory\BasicWSFactory;
 use SkautisBundle\Profiler\SkautisDataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SkautisDataCollectorTest extends \PHPUnit_Framework_TestCase
 {
+
+    protected function makeSkautis()
+    {
+	$config = new Config('id123');
+	$sessionAdapter = new FakeAdapter();
+	$factory = new BasicWSFactory();
+	$wsdlManager = new WsdlManager($factory, $config);
+
+	return new Skautis($config, $wsdlManager, $sessionAdapter);
+    }
+
+
     public function testCollect()
     {
-	$logoutDate = new \DateTime();
+        $data = [
+                'skautIS_Token' => 'tok_en',
+		'skautIS_IDUnit' => 456,
+		'skautIS_IDRole' => 789,
+   		'skautIS_DateLogout' => '2. 12. 2014 23:56:02'
+        ];
 
-        $skautis = new Skautis("id123", false, true);
-        $skautis->setToken("tok_en");
-	$skautis->setUnitId(456);
-	$skautis->setRoleId(789);
-	$skautis->setLogoutDate($logoutDate);
+	$skautis = $this->makeSkautis();
+	$skautis->setLoginData($data);
 
 	$dataCollector = new SkautisDataCollector($skautis);
 	$request = new Request();
@@ -31,13 +49,15 @@ class SkautisDataCollectorTest extends \PHPUnit_Framework_TestCase
 
     public function testSerialize()
     {
-	$logoutDate = new \DateTime();
+        $data = [
+                'skautIS_Token' => 'tok_en',
+		'skautIS_IDUnit' => 456,
+		'skautIS_IDRole' => 789,
+   		'skautIS_DateLogout' => '2. 12. 2014 23:56:02'
+        ];
 
-        $skautis = new Skautis("id123", false, true);
-        $skautis->setToken("tok_en");
-	$skautis->setUnitId(456);
-	$skautis->setRoleId(789);
-	$skautis->setLogoutDate($logoutDate);
+	$skautis = $this->makeSkautis();
+	$skautis->setLoginData($data);
 
 	$dataCollector = new SkautisDataCollector($skautis);
 	$request = new Request();
