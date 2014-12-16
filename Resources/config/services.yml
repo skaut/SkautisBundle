@@ -4,6 +4,8 @@ parameters:
     skautis.ws_factory_class: 'SkautisBundle\Skautis\StopwatchWSFactory'
     skautis.session_adapter_class: 'SkautisBundle\Skautis\SessionAdapter'
     skautis.data_collector_class: 'SkautisBundle\Profiler\SkautisDataCollector'
+    skautis.config_class: 'Skautis\Config'
+    skautis.wsdl_manager_class: 'Skautis\WsdlManager'
 
 services:
     skautis.ws_factory:
@@ -13,22 +15,32 @@ services:
         calls:
             - [ setStopwatch, [@debug.stopwatch]]
 
+    skautis.wsdl_manager:
+        class: "%skautis.wsdl_manager_class%"
+        arguments:
+            - @skautis.ws_factory
+            - @skautis.config
+
     skautis.session_adapter:
         class: "%skautis.session_adapter_class%"
         arguments:
             - @session
 
-    skautis:
-        class: "%skautis.skautis_class%"
+    skautis.config:
+        class: "%skautis.config_class%"
         arguments:
             - "%skautis.app_id%"
             - "%skautis.test_mode%"
             - "%skautis.profiler%"
-            - @skautis.session_adapter
-            - @skautis.ws_factory
             - "%skautis.cache%"
-        calls:
-            - [setCompression, ["%skautis.compression%"]]
+            - "%skautis.compression%"
+
+    skautis:
+        class: "%skautis.skautis_class%"
+        arguments:
+            - @skautis.config
+            - @skautis.wsdl_manager
+            - @skautis.session_adapter
 
     data_collector.skautis_collector:
         class: "%skautis.data_collector_class%"
@@ -37,3 +49,7 @@ services:
         tags:
             - { name: data_collector, template: "SkautisBundle:Collector:template", id: "skautis_collector"}
 
+    skautis_authenticator:
+        class: "SkautisBundle\Security\SkautisAuthenticator"
+        arguments:
+           - @skautis

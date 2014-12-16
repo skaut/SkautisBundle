@@ -24,19 +24,20 @@ class SkautisDataCollector extends DataCollector
 
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
+	$config = $this->skautis->getConfig();
         $this->data = array(
-    	    'queries' => $this->skautis->log,
-            'app_id' => $this->skautis->getAppId(),
-	    'test_mode' => $this->skautis->IsTestMode(),
-	    'compression' => $this->skautis->isCompression(),
-	    'profiling_enabled' => $this->skautis->isProfiling(),
-	    'role_id' => $this->skautis->getRoleId(),
-	    'unit_id' => $this->skautis->getUnitId(),
-	    'token' => $this->skautis->getToken(),
-	    'is_logged_in' => $this->skautis->isLoggedIn(),
-	    'logout_date' => $this->skautis->getLogoutDate(),
-	    'cache' => $this->skautis->isCacheEnabled(),
-	    'maintenance' => $this->skautis->isMaintenance(),
+    	    'queries'           => $this->skautis->log,
+            'app_id'            => $config->getAppId(),
+	    'test_mode'         => $config->getTestMode(),
+	    'profiling_enabled' => $config->getProfiler(),
+	    'cache'             => $config->getCache(),
+	    'compression'       => $config->getCompression(),
+	    'role_id'           => $this->skautis->getRoleId(),
+	    'unit_id'           => $this->skautis->getUnitId(),
+	    'token'             => $this->skautis->getLoginId(),
+	    'is_logged_in'      => $this->skautis->isLoggedIn(),
+	    'logout_date'       => $this->skautis->getLogoutDate(),
+	    'maintenance'       => $this->skautis->isMaintenance(),
         );
     }
 
