@@ -26,10 +26,9 @@ class SkautisDataCollector extends DataCollector
     {
 	$config = $this->skautis->getConfig();
         $this->data = array(
-    	    'queries'           => $this->skautis->log,
+    	    'queries'           => $this->skautis->getDebugLog(),
             'app_id'            => $config->getAppId(),
-	    'test_mode'         => $config->getTestMode(),
-	    'profiling_enabled' => $config->getProfiler(),
+	    'test_mode'         => $config->isTestMode(),
 	    'cache'             => $config->getCache(),
 	    'compression'       => $config->getCompression(),
 	    'role_id'           => $this->skautis->getRoleId(),

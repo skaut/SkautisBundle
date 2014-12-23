@@ -1,11 +1,11 @@
 <?php
 
-namespace SkautisBundle\Skautis;
+namespace SkautisBundle\Skautis\Wsdl;
 
-use Skautis\Factory\BasicWSFactory;
+use Skautis\Wsdl\WebServiceFactory;
 use Symfony\Component\Stopwatch\Stopwatch;
 
-class StopwatchWSFactory extends BasicWSFactory
+class StopwatchWebServiceFactory extends WebServiceFactory
 {
 
    /**
@@ -28,7 +28,7 @@ class StopwatchWSFactory extends BasicWSFactory
    /**
     * @inheritdoc
     */
-    public function createWS($wsdl, array $init)
+    public function createWebService($wsdl, array $init)
     {
         $ws = new $this->class($wsdl, $init);
 

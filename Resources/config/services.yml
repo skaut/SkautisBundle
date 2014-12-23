@@ -1,11 +1,12 @@
 parameters:
     skautis.skautis_class: 'Skautis\Skautis'
-    skautis.ws_class: 'SkautisBundle\Skautis\StopwatchWS'
-    skautis.ws_factory_class: 'SkautisBundle\Skautis\StopwatchWSFactory'
+    skautis.skautis_factory_class: 'SkautisBundle\Skautis\SkautisFactory'
+    skautis.ws_class: 'SkautisBundle\Skautis\Wsdl\StopwatchWebService'
+    skautis.ws_factory_class: 'SkautisBundle\Skautis\Wsdl\StopwatchWebServiceFactory'
     skautis.session_adapter_class: 'SkautisBundle\Skautis\SessionAdapter'
     skautis.data_collector_class: 'SkautisBundle\Profiler\SkautisDataCollector'
     skautis.config_class: 'Skautis\Config'
-    skautis.wsdl_manager_class: 'Skautis\WsdlManager'
+    skautis.wsdl_manager_class: 'Skautis\Wsdl\WsdlManager'
 
 services:
     skautis.ws_factory:
@@ -35,12 +36,16 @@ services:
             - "%skautis.cache%"
             - "%skautis.compression%"
 
+    skautis.skautis_factory:
+        class: '%skautis.skautis_factory_class%'
+
     skautis:
         class: "%skautis.skautis_class%"
+        factory: [@skautis.skautis_factory, 'createSkautis']
         arguments:
-            - @skautis.config
             - @skautis.wsdl_manager
             - @skautis.session_adapter
+            - "%skautis.profiler%"
 
     data_collector.skautis_collector:
         class: "%skautis.data_collector_class%"

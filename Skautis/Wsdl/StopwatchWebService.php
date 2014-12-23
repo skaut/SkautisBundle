@@ -1,11 +1,11 @@
 <?php
 
-namespace SkautisBundle\Skautis;
+namespace SkautisBundle\Skautis\Wsdl;
 
-use Skautis\WS;
+use Skautis\Wsdl\WebService;
 use Symfony\Component\Stopwatch\Stopwatch;
 
-class StopwatchWS extends WS
+class StopwatchWebService extends WebService
 {
 
    /**
