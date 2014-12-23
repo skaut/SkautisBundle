@@ -3,8 +3,8 @@
 use Skautis\Skautis;
 use Skautis\Config;
 use Skautis\SessionAdapter\FakeAdapter;
-use Skautis\WsdlManager;
-use Skautis\Factory\BasicWSFactory;
+use Skautis\Wsdl\WsdlManager;
+use Skautis\Wsdl\WebServiceFactory;
 use SkautisBundle\Profiler\SkautisDataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +16,10 @@ class SkautisDataCollectorTest extends \PHPUnit_Framework_TestCase
     {
 	$config = new Config('id123');
 	$sessionAdapter = new FakeAdapter();
-	$factory = new BasicWSFactory();
+	$factory = new WebServiceFactory();
 	$wsdlManager = new WsdlManager($factory, $config);
 
-	return new Skautis($config, $wsdlManager, $sessionAdapter);
+	return new Skautis($wsdlManager, $sessionAdapter);
     }
 
 
