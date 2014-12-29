@@ -2,6 +2,7 @@
 
 use Skautis\Skautis;
 use Skautis\Config;
+use Skautis\User;
 use Skautis\SessionAdapter\FakeAdapter;
 use Skautis\Wsdl\WsdlManager;
 use Skautis\Wsdl\WebServiceFactory;
@@ -18,8 +19,9 @@ class SkautisDataCollectorTest extends \PHPUnit_Framework_TestCase
 	$sessionAdapter = new FakeAdapter();
 	$factory = new WebServiceFactory();
 	$wsdlManager = new WsdlManager($factory, $config);
+	$user = new user($wsdlManager, $sessionAdapter);
 
-	return new Skautis($wsdlManager, $sessionAdapter);
+	return new Skautis($wsdlManager, $user);
     }
 
 

@@ -30,10 +30,8 @@ class AuthController extends Controller
         $skautis = $this->get('skautis');
         $skautis->setLoginData($request->request->all());
 
-	\dump($request->request->all());
-	\dump($skautis->isLoggedIn(true));
-	if (!$skautis->isLoggedIn(true)) {
-	    $skautis->resetLoginData();
+	if (!$skautis->getUser()->isLoggedIn(true)) {
+	    $skautis->getUser()->resetLoginData();
 	    return $this->redirect($skautis->getLoginUrl());
 	}
 

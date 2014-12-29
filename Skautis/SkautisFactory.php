@@ -4,7 +4,7 @@ namespace SkautisBundle\Skautis;
 
 use Skautis\Skautis;
 use Skautis\Wsdl\WsdlManager;
-use Skautis\SessionAdapter\AdapterInterface;
+use Skautis\User;
 
 class SkautisFactory
 {
@@ -17,9 +17,9 @@ class SkautisFactory
      *
      * @return Skautis
      */
-    public function createSkautis(WsdlManager $wsdlManager, AdapterInterface $sessionAdapter, $debug)
+    public function createSkautis(WsdlManager $wsdlManager, User $user, $debug)
     {
-        $skautis = new Skautis($wsdlManager, $sessionAdapter);
+        $skautis = new Skautis($wsdlManager, $user);
 
 	if ($debug) {
             $skautis->enableDebugLog();

@@ -31,11 +31,11 @@ class SkautisDataCollector extends DataCollector
 	    'test_mode'         => $config->isTestMode(),
 	    'cache'             => $config->getCache(),
 	    'compression'       => $config->getCompression(),
-	    'role_id'           => $this->skautis->getRoleId(),
-	    'unit_id'           => $this->skautis->getUnitId(),
-	    'token'             => $this->skautis->getLoginId(),
-	    'is_logged_in'      => $this->skautis->isLoggedIn(),
-	    'logout_date'       => $this->skautis->getLogoutDate(),
+	    'role_id'           => $this->skautis->getUser()->getRoleId(),
+	    'unit_id'           => $this->skautis->getUser()->getUnitId(),
+	    'token'             => $this->skautis->getUser()->getLoginId(),
+	    'is_logged_in'      => $this->skautis->getUser()->isLoggedIn(),
+	    'logout_date'       => $this->skautis->getUser()->getLogoutDate(),
 	    'maintenance'       => $this->skautis->isMaintenance(),
         );
     }
