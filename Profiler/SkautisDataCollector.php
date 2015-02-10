@@ -3,7 +3,6 @@
 namespace SkautisBundle\Profiler;
 
 use Skautis\Skautis;
-use Skatis\SkautisQuery;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +24,7 @@ class SkautisDataCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
 	$config = $this->skautis->getConfig();
-        $this->data = array(
+        $this->data = [
     	    'queries'           => $this->skautis->getDebugLog(),
             'app_id'            => $config->getAppId(),
 	    'test_mode'         => $config->isTestMode(),
@@ -37,7 +36,7 @@ class SkautisDataCollector extends DataCollector
 	    'is_logged_in'      => $this->skautis->getUser()->isLoggedIn(),
 	    'logout_date'       => $this->skautis->getUser()->getLogoutDate(),
 	    'maintenance'       => $this->skautis->isMaintenance(),
-        );
+        ];
     }
 
     public function __call($method, $args)

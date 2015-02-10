@@ -2,7 +2,7 @@
 
 namespace SkautisBundle\Tests\Integration;
 
-require_once dirname(__DIR__).'/../../../../app/AppKernel.php';
+require_once dirname(__DIR__) . '/../../../../app/AppKernel.php';
 
 /**
  * Test case class helpful with Entity tests requiring the database interaction.

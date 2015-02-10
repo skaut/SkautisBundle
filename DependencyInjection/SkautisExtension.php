@@ -28,7 +28,7 @@ class SkautisExtension extends Extension
 	$container->setParameter('skautis.compression', $config['compression']);
 	$container->setParameter('skautis.cache', $config['cache']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }
 }

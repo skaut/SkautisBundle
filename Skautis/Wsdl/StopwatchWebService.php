@@ -18,7 +18,7 @@ class StopwatchWebService extends WebService
     /**
      * @var int[]
      */
-    protected $counter = array();
+    protected $counter = [];
 
     public function setStopwatch(Stopwatch $stopwatch)
     {

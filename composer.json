@@ -9,6 +9,9 @@
         "skautis/skautis": "2.*@dev",
 	"symfony/framework-bundle": "2.6.*"
     },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "@stable"
+    },
     "autoload": {
 	"psr-4": { "SkautisBundle\\": "" }
     },
@@ -18,5 +21,10 @@
             "name": "Jindrich Pilar",
             "email": "pilar.jindrich@gmail.com"
         }
-    ]
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "ln -s ../../fix_syle.sh .git/hooks/pre-commit"
+        ]
+    }
 }

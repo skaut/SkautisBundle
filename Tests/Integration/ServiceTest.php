@@ -2,7 +2,6 @@
 
 namespace SkautisBundle\Tests\Integration;
 
-use SkautisBundle\Tests\Integration\KernelAwareTest;
 
 class ServiceTest extends KernelAwareTest
 {
