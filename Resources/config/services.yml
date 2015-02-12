@@ -8,6 +8,8 @@ parameters:
     skautis.config_class: 'Skautis\Config'
     skautis.wsdl_manager_class: 'Skautis\Wsdl\WsdlManager'
     skautis.user_class: 'Skautis\User'
+    skautis.cache_class: 'SkautisBundle\Skautis\Wsdl\Decorator\Cache\DoctrineCache'
+    skautis.cache.ttl: 0
 
 services:
     skautis.ws_factory:
@@ -34,9 +36,8 @@ services:
             - "%skautis.app_id%"
             - "%skautis.test_mode%"
             - "%skautis.profiler%"
-            - "%skautis.cache%"
+            - "%skautis.wsdl_cache%"
             - "%skautis.compression%"
-
 
     skautis.user:
         class: "%skautis.user_class%"

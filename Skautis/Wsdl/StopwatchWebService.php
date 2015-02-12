@@ -40,14 +40,24 @@ class StopwatchWebService extends WebService
 	return $name;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function __call($function_name, $arguments)
     {
+        return $this->call($function_name, $arguments);
+    }
 
+    /**
+     * @inheritdoc
+     */
+    public function call($function_name, array $arguments = [])
+    {
         $name = $this->getWatchName($function_name);
 	$this->stopwatch->start($name, "skautis");
 
 	try {
-            $result = $this->__soapCall($function_name, $arguments);
+            $result = parent::call($function_name, $arguments);
 	}
 	catch (\Exception $e) {
 	    throw $e;
@@ -58,6 +68,5 @@ class StopwatchWebService extends WebService
 
 	return $result;
     }
-
 
 }

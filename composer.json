@@ -22,6 +22,9 @@
             "email": "pilar.jindrich@gmail.com"
         }
     ],
+    "suggest": {
+        "doctrine/doctrine-cache-bundle": "Pro cachovani pozadavku na server SkautISu"
+    },
     "scripts": {
         "post-install-cmd": [
             "ln -s ../../fix_syle.sh .git/hooks/pre-commit"
