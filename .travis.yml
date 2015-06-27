@@ -3,10 +3,23 @@ language: php
 php:
   - 5.5
   - 5.6
+  - 7.0
+  - nightly
+  - hhvm
 
 
-before_script:
+matrix:
+  allow_failures:
+    - php: [7.0, nightly, hhvm]
+
+before_install:
   - composer self-update
-  - composer update -o --prefer-source
+
+install:
+  - composer install -o --prefer-source
 
 script: phpunit --coverage-clover=coverage.clover
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
