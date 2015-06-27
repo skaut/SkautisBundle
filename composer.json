@@ -6,7 +6,7 @@
     "require": {
 	"php": ">=5.5",
 	"psr/log": "~1.0",
-        "skautis/skautis": "2.*@dev",
+        "skautis/skautis": "2.0.*",
 	"symfony/framework-bundle": "2.6.*"
     },
     "require-dev": {
