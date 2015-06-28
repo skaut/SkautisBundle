@@ -63,3 +63,8 @@ services:
         tags:
             - { name: data_collector, template: "SkautisBundle:Collector:template", id: "skautis_collector"}
 
+    skautis.monolog.processor:
+        class: SkautisBundle\Monolog\SkautisProcessor
+        arguments:  ["@skautis"]
+        tags:
+            - { name: monolog.processor, method: processRecord, channel: skautis }
