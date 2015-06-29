@@ -26,12 +26,12 @@ class SkautisProcessor
     public function processRecord(array $record)
     {
 
-        if ($this->user == "NONE") {
+        if (!$this->user) {
             $this->user = $this->skautis->user->UserDetail();
         }
 
         $data = [
-            'uid' => isset($this->user['ID']) ? $this->user['ID'] : "NONE",
+            'uid' => isset($this->user->ID) ? $this->user->ID : "NONE",
         ];
 
         $record['extra']['skautis'] = $data;

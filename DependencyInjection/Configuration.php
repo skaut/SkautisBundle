@@ -40,8 +40,13 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->integerNode('request_cache_ttl')
                 ->defaultValue(0)
-            ->end();
-
+            ->end()
+	    ->scalarNode('after_login_redirect')
+                ->defaultValue('homepage')
+	    ->end()
+	    ->scalarNode('after_logout_redirect')
+                ->defaultValue('homepage')
+	    ->end();
 
         return $treeBuilder;
     }

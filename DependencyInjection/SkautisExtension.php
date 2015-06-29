@@ -30,6 +30,8 @@ class SkautisExtension extends Extension
 	$container->setParameter('skautis.compression', $config['compression']);
         $container->setParameter('skautis.wsdl_cache', $config['wsdl_cache']);
         $container->setParameter('skautis.doctrine.cache.ttl', $config['request_cache_ttl']);
+	$container->setParameter('skautis.after_login_redirect', $config['after_login_redirect']);
+	$container->setParameter('skautis.after_logout_redirect', $config['after_logout_redirect']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');

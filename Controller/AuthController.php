@@ -16,7 +16,6 @@ class AuthController extends Controller
      */
     public function loginAction()
     {
-
 	$loginUrl = $this->get('skautis')->getLoginUrl();
         return $this->redirect($loginUrl);
     }
@@ -26,7 +25,6 @@ class AuthController extends Controller
      */
     public function loginConfirmAction(Request $request)
     {
-
         $skautis = $this->get('skautis');
         $skautis->setLoginData($request->request->all());
 
@@ -36,7 +34,9 @@ class AuthController extends Controller
 	}
 
         $this->addFlash('notice', 'Byl/a jste prihlasena');
-        return $this->redirectToRoute("homepage");
+
+        $redirectRoute = $this->container->getParameter('skautis.after_login_redirect');
+        return $this->redirectToRoute($redirectRoute);
     }
 
     /**
@@ -44,7 +44,6 @@ class AuthController extends Controller
      */
     public function logoutAction()
     {
-
 	$logoutUrl = $this->get('skautis')->getLogoutUrl();
         return $this->redirect($logoutUrl);
     }
@@ -57,7 +56,8 @@ class AuthController extends Controller
         $this->get('session')->invalidate();
         $this->addFlash('notice', 'Byl/a jste odhlasena');
 
-        return $this->redirectToRoute("homepage");
+        $redirectRoute = $this->container->getParameter('skautis.after_logout_redirect');
+        return $this->redirectToRoute($redirectRoute);
     }
 
     /**
