@@ -31,7 +31,7 @@ class DoctrineCache implements CacheInterface
     {
         $data = $this->doctrineCache->fetch($key);
 
-        if ($key === false) {
+        if ($data === false) {
             return null;
         }
 
