@@ -2,8 +2,10 @@
 
 namespace SkautisBundle\Controller;
 
+use SkautisBundle\Security\Authentication\DoctrineUserConnector;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Trida pro authentikaci uzivatele pomoci is.skaut.cz
@@ -68,5 +70,39 @@ class AuthController extends Controller
 
 	$registerUrl = $this->get('skautis')->getRegisterUrl();
         return $this->redirect($registerUrl);
+    }
+
+    public function connectAction() {
+
+        $userDetail = $this->get("skautis")->user->UserDetail();
+        $personId = $userDetail->ID_Person;
+
+        $user = $this->getUser();
+        if (!$user instanceof UserInterface) {
+            //@TODO error
+        }
+        $username = 'pid_142668'; // @TODO
+
+
+        /** @var DoctrineUserConnector $connector */
+        $connector = $this->get("skautis.security.authentication.connector");
+        $connector->connect($personId, $username);
+
+        return $this->redirectToRoute("homepage");
+    }
+
+    public function disconnectAction() {
+
+        $user = $this->getUser();
+        if (!$user instanceof UserInterface) {
+            //@TODO error
+        }
+        $username = 'pid_142668'; // @TODO
+
+        /** @var DoctrineUserConnector $connector */
+        $connector = $this->get("skautis.security.authentication.connector");
+        $connector->disconnect($username);
+
+        return $this->redirectToRoute("homepage");
     }
 }

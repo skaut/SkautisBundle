@@ -10,6 +10,13 @@ parameters:
     skautis.user_class: 'Skautis\User'
     skautis.cache_class: 'SkautisBundle\Skautis\Wsdl\Decorator\Cache\DoctrineCache'
     skautis.cache.ttl: 0
+    skautis.user.provider.class: 'asd'
+    skautis.security.authentication.connector.class: 'SkautisBundle\Security\Authentication\DoctrineUserConnector'
+    skautis.security_authentication.skautis_entry_point.class: 'SkautisBundle\Security\Authentication\SkautisEntryPoint'
+    skautis.security_authentication.skautis_logout_handler.class: 'SkautisBundle\Security\Authentication\SkautisLogoutHandler'
+    skautis.security.authentication.listener.class: 'SkautisBundle\Security\Authentication\SkautisListener'
+    skautis.security.authentication.provider.class: 'SkautisBundle\Security\Authentication\SkautisProvider'
+    skautis.monolog.processor.class: 'SkautisBundle\Monolog\SkautisProcessor'
 
 services:
     skautis.ws_factory:
@@ -64,7 +71,36 @@ services:
             - { name: data_collector, template: "SkautisBundle:Collector:template", id: "skautis_collector"}
 
     skautis.monolog.processor:
-        class: SkautisBundle\Monolog\SkautisProcessor
+        class: "%skautis.monolog.processor.class%"
         arguments:  ["@skautis"]
         tags:
             - { name: monolog.processor, method: processRecord, channel: skautis }
+
+    skautis.user.provider:
+        class: "%skautis.user.provider.class%"
+        public: false
+
+    skautis.security.authentication.provider:
+        class: "%skautis.security.authentication.provider.class%"
+        arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces"]
+        public: false
+
+    skautis.security.authentication.listener:
+        class: "%skautis.security.authentication.listener.class%"
+        arguments: ["@security.token_storage", "@security.authentication.manager", "@skautis.security.authentication.connector", "@skautis"]
+        public: false
+
+    skautis.security_authentication.skautis_logout_handler:
+        class:  "%skautis.security_authentication.skautis_logout_handler.class%"
+        arguments: [ "@skautis" ]
+        public: false
+
+
+    skautis.security_authentication.skautis_entry_point:
+        class: "%skautis.security_authentication.skautis_entry_point.class%"
+        arguments: [ @skautis ]
+        public: false
+
+    skautis.security.authentication.connector:
+        class: "%skautis.security.authentication.connector.class%"
+        arguments: [@doctrine.orm.entity_manager]
