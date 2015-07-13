@@ -5,20 +5,23 @@ namespace SkautisBundle\Security\Authentication;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Exception\NonceExpiredException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Util\StringUtils;
-use SkautisBundle\Security\Authentication\SkautisToken;
 
 class SkautisProvider implements AuthenticationProviderInterface
 {
     private $userProvider;
     private $cacheDir;
+    private $userRegistrator;
+    private $userConnector;
+    private $enableAutoRegister = true;
 
-    public function __construct(UserProviderInterface $userProvider, $cacheDir)
+
+    public function __construct(UserProviderInterface $userProvider, $cacheDir, UserRegistratorInterface $userRegistrator, SkautisUserConnectorInterface $userConnector)
     {
         $this->userProvider = $userProvider;
         $this->cacheDir     = $cacheDir;
+        $this->userRegistrator = $userRegistrator;
+        $this->userConnector = $userConnector;
     }
 
 
@@ -27,7 +30,28 @@ class SkautisProvider implements AuthenticationProviderInterface
      */
     public function authenticate(TokenInterface $token)
     {
-        $user = $this->userProvider->loadUserByUsername($token->getUsername());
+
+        /**
+         * @var $token SkautisToken
+         */
+
+        $user = null;
+        try {
+            $username = $this->userConnector->getUsername($token->getPersonId());
+            $user = $this->userProvider->loadUserByUsername($username);
+        }
+        catch (\Exception $e) {
+            //@TODO kdyz ne autoregistrace tak throw znova?
+        }
+
+
+        if (!$user && $this->enableAutoRegister) {
+            $username = $this->userRegistrator->registerUser();
+            $this->userConnector->connect($token->getPersonId(), $username);
+            //@TODO log registration
+
+            $user = $this->userProvider->loadUserByUsername($username);
+        }
 
         if (!$user) {
             throw new AuthenticationException('The Skautis authentication failed.');

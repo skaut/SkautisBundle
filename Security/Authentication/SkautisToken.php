@@ -7,7 +7,10 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 class SkautisToken extends AbstractToken
 {
 
-    public $skautisUserId;
+    /**
+     * @var string
+     */
+    protected $personId;
 
     public function __construct(array $roles = array())
     {
@@ -21,4 +24,22 @@ class SkautisToken extends AbstractToken
     {
         return '';
     }
+
+    /**
+     * @return string
+     */
+    public function getPersonId()
+    {
+        return $this->personId;
+    }
+
+    /**
+     * @param string $personId
+     */
+    public function setPersonId($personId)
+    {
+        $this->personId = $personId;
+    }
+
+
 }

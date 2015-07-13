@@ -42,14 +42,12 @@ class SkautisListener implements ListenerInterface
      * SkautisListener constructor.
      * @param TokenStorageInterface $tokenStorage
      * @param AuthenticationManagerInterface $authenticationManager
-     * @param SkautisUserConnectorInterface $userConnector
      * @param Skautis $skautis
      */
-    public function __construct(TokenStorageInterface $tokenStorage, AuthenticationManagerInterface $authenticationManager, SkautisUserConnectorInterface $userConnector, Skautis $skautis)
+    public function __construct(TokenStorageInterface $tokenStorage, AuthenticationManagerInterface $authenticationManager, Skautis $skautis)
     {
         $this->tokenStorage = $tokenStorage;
         $this->authenticationManager = $authenticationManager;
-        $this->userConnector = $userConnector;
         $this->skautis = $skautis;
     }
 
@@ -60,12 +58,10 @@ class SkautisListener implements ListenerInterface
     public function handle(GetResponseEvent $event)
     {
         try {
-            $token = new SkautisToken();
             $userDetail = $this->skautis->user->UserDetail();
 
-            $username = $this->userConnector->getUsername($userDetail->ID_Person);
-            $token->setUser($username);
-
+            $token = new SkautisToken();
+            $token->setPersonId($userDetail->ID_Person);
 
             $authenticatedToken = $this->authenticationManager->authenticate($token);
             $this->tokenStorage->setToken($authenticatedToken);

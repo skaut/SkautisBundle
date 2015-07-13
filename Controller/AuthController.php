@@ -79,14 +79,13 @@ class AuthController extends Controller
 
         $user = $this->getUser();
         if (!$user instanceof UserInterface) {
-            //@TODO error
+            $this->addFlash("error", "Nelze propojit ucty! Nikdo neni prihlasen.");
+            return $this->redirectToRoute("homepage");
         }
-        $username = 'pid_142668'; // @TODO
-
 
         /** @var DoctrineUserConnector $connector */
         $connector = $this->get("skautis.security.authentication.connector");
-        $connector->connect($personId, $username);
+        $connector->connect($personId, $user->getUsername());
 
         return $this->redirectToRoute("homepage");
     }
@@ -95,13 +94,13 @@ class AuthController extends Controller
 
         $user = $this->getUser();
         if (!$user instanceof UserInterface) {
-            //@TODO error
+            $this->addFlash("error", "Nelze rozpojit ucty! Nikdo neni prihlasen.");
+            return $this->redirectToRoute("homepage");
         }
-        $username = 'pid_142668'; // @TODO
 
         /** @var DoctrineUserConnector $connector */
         $connector = $this->get("skautis.security.authentication.connector");
-        $connector->disconnect($username);
+        $connector->disconnect($user->getUsername());
 
         return $this->redirectToRoute("homepage");
     }

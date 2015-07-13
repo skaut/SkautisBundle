@@ -82,12 +82,12 @@ services:
 
     skautis.security.authentication.provider:
         class: "%skautis.security.authentication.provider.class%"
-        arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces"]
+        arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces", "@skautis.security.authentication.registrator", "@skautis.security.authentication.connector"]
         public: false
 
     skautis.security.authentication.listener:
         class: "%skautis.security.authentication.listener.class%"
-        arguments: ["@security.token_storage", "@security.authentication.manager", "@skautis.security.authentication.connector", "@skautis"]
+        arguments: ["@security.token_storage", "@security.authentication.manager", "@skautis"]
         public: false
 
     skautis.security_authentication.skautis_logout_handler:
@@ -104,3 +104,7 @@ services:
     skautis.security.authentication.connector:
         class: "%skautis.security.authentication.connector.class%"
         arguments: [@doctrine.orm.entity_manager]
+
+
+    skautis.security.authentication.registrator:
+        abstract: true
