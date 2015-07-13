@@ -34,3 +34,7 @@ skautis_disconnect:
     path:     /skautis_disconnect
     defaults: { _controller: SkautisBundle:Auth:disconnect }
     methods:  [GET]
+
+skautis_error:
+    path:     /skautis/error
+    defaults: { _controller: SkautisBundle:Error:error }

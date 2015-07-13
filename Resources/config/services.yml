@@ -95,7 +95,6 @@ services:
         arguments: [ "@skautis" ]
         public: false
 
-
     skautis.security_authentication.skautis_entry_point:
         class: "%skautis.security_authentication.skautis_entry_point.class%"
         arguments: [ @skautis ]
@@ -105,6 +104,10 @@ services:
         class: "%skautis.security.authentication.connector.class%"
         arguments: [@doctrine.orm.entity_manager]
 
-
     skautis.security.authentication.registrator:
         abstract: true
+
+    kernel.listener.your_listener_name:
+        class: SkautisBundle\EventListener\SkautisExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
