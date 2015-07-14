@@ -2,6 +2,7 @@
 
 namespace SkautisBundle\Security\Authentication;
 
+use SkautisBundle\Security\Core\Role\SkautisRole;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -57,7 +58,7 @@ class SkautisProvider implements AuthenticationProviderInterface
             throw new AuthenticationException('The Skautis authentication failed.');
         }
 
-        $roles = array_merge($user->getRoles(), ["SKAUTIS_USER"]);
+        $roles = array_merge($user->getRoles(), [new SkautisRole()]);
         $authenticatedToken = new SkautisToken($roles);
         $authenticatedToken->setUser($user);
         $authenticatedToken->setAuthenticated(true);
