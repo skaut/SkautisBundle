@@ -82,7 +82,7 @@ services:
 
     skautis.security.authentication.provider:
         class: "%skautis.security.authentication.provider.class%"
-        arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces", "@skautis.security.authentication.registrator", "@skautis.security.authentication.connector"]
+        arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces", "@skautis.security.authentication.registrator", "@skautis.security.authentication.connector", false]
         public: false
 
     skautis.security.authentication.listener:

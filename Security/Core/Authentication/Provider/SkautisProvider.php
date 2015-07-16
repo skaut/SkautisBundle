@@ -20,12 +20,13 @@ class SkautisProvider implements AuthenticationProviderInterface
     private $enableAutoRegister = true;
 
 
-    public function __construct(UserProviderInterface $userProvider, $cacheDir, UserRegistratorInterface $userRegistrator, SkautisUserConnectorInterface $userConnector)
+    public function __construct(UserProviderInterface $userProvider, $cacheDir, UserRegistratorInterface $userRegistrator, SkautisUserConnectorInterface $userConnector, $enableAutoregister)
     {
         $this->userProvider = $userProvider;
         $this->cacheDir     = $cacheDir;
         $this->userRegistrator = $userRegistrator;
         $this->userConnector = $userConnector;
+        $this->enableAutoRegister = $enableAutoregister;
     }
 
 
