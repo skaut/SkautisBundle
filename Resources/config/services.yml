@@ -97,7 +97,7 @@ services:
 
     skautis.security_authentication.skautis_entry_point:
         class: "%skautis.security_authentication.skautis_entry_point.class%"
-        arguments: [ @skautis ]
+        arguments: [ @router ]
         public: false
 
     skautis.security.authentication.connector:
