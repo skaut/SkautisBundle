@@ -1,6 +1,6 @@
 <?php
 
-namespace SkautisBundle\Security\Authentication;
+namespace SkautisBundle\Security\Core\Authentication\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 

@@ -4,7 +4,7 @@ namespace SkautisBundle\Controller;
 
 use SkautisBundle\EventDispatcher\Event\SkautisConnectEvent;
 use SkautisBundle\EventDispatcher\Event\SkautisDisconnectEvent;
-use SkautisBundle\Security\Authentication\SkautisUserConnectorInterface;
+use SkautisBundle\DependencyInjection\Security\Factory\SkautisUserConnectorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\User\UserInterface;
 

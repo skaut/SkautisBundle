@@ -12,10 +12,10 @@ parameters:
     skautis.cache.ttl: 0
     skautis.user.provider.class: 'asd'
     skautis.security.authentication.connector.class: 'SkautisBundle\Security\Authentication\DoctrineUserConnector'
-    skautis.security_authentication.skautis_entry_point.class: 'SkautisBundle\Security\Authentication\SkautisEntryPoint'
-    skautis.security_authentication.skautis_logout_handler.class: 'SkautisBundle\Security\Authentication\SkautisLogoutHandler'
-    skautis.security.authentication.listener.class: 'SkautisBundle\Security\Authentication\SkautisListener'
-    skautis.security.authentication.provider.class: 'SkautisBundle\Security\Authentication\SkautisProvider'
+    skautis.security_authentication.skautis_entry_point.class: 'SkautisBundle\Security\Http\EntryPoint\SkautisEntryPoint'
+    skautis.security_authentication.skautis_logout_handler.class: 'SkautisBundle\Security\Http\Logout\SkautisLogoutHandler'
+    skautis.security.authentication.listener.class: 'SkautisBundle\Security\Http\Firewall\SkautisListener'
+    skautis.security.authentication.provider.class: 'SkautisBundle\Security\Core\Authentication\Provider\SkautisProvider'
     skautis.monolog.processor.class: 'SkautisBundle\Monolog\SkautisProcessor'
 
 services:

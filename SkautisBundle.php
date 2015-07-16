@@ -4,7 +4,7 @@ namespace SkautisBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use SkautisBundle\Security\Authentication\SkautisFactory;
+use SkautisBundle\DependencyInjection\Security\Factory\SkautisFactory;
 
 class SkautisBundle extends Bundle
 {

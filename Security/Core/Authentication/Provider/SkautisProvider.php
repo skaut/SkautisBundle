@@ -1,7 +1,10 @@
 <?php
 
-namespace SkautisBundle\Security\Authentication;
+namespace SkautisBundle\Security\Core\Authentication\Provider;
 
+use SkautisBundle\Security\Authentication\SkautisUserConnectorInterface;
+use SkautisBundle\Security\Authentication\UserRegistratorInterface;
+use SkautisBundle\Security\Core\Authentication\Token\SkautisToken;
 use SkautisBundle\Security\Core\Role\SkautisRole;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;

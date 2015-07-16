@@ -6,7 +6,7 @@
  * Time: 21:04
  */
 
-namespace SkautisBundle\Security\Authentication;
+namespace SkautisBundle\Security\Http\EntryPoint;
 
 use Skautis\Skautis;
 use Symfony\Component\HttpFoundation\RedirectResponse;
