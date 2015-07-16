@@ -1,37 +1,35 @@
 skautis_login:
-    path:     /skautis_login
+    path:     /skautis/auth/login
     defaults: { _controller: SkautisBundle:Auth:login }
     methods:  [GET]
 
 skautis_login_confirm:
-    path:     /skautis_login
+    path:     /skautis/auth/login
     defaults: { _controller: SkautisBundle:Auth:loginConfirm }
     methods:  [POST]
 
 skautis_logout:
-    path:     /skautis_logout
+    path:     /skautis/auth/logout
     defaults: { _controller: SkautisBundle:Auth:logout }
     methods:  [GET]
 
 skautis_logout_confirm:
-    path:     /skautis_logout
+    path:     /skautis/authlogout
     defaults: { _controller: SkautisBundle:Auth:logoutConfirm }
     methods:  [POST]
 
 skautis_register:
-    path:     /skautis_register
+    path:     /skautis/auth/register
     defaults: { _controller: SkautisBundle:Auth:register }
     methods:  [GET]
 
-
 skautis_connect:
-    path:     /skautis_connect
+    path:     /skautis/user/connect
     defaults: { _controller: SkautisBundle:Connection:connect }
     methods:  [GET]
 
-
 skautis_disconnect:
-    path:     /skautis_disconnect
+    path:     /skautis/user/disconnect
     defaults: { _controller: SkautisBundle:Connection:disconnect }
     methods:  [GET]
 
