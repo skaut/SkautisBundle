@@ -42,74 +42,89 @@
 {% endblock %}
 
 {% block panel %}
-   <h2>Skautis - pozadavky na server</h2>
+    <h2>Skautis</h2>
 
-   <table>
-     <tr>
-       <th>Maintenance</th>
-       <td>{{ collector.maintenance ? 'Yes' : 'False' }}</td>
-     </tr>
-     <tr>
-       <th>App id</th>
-       <td>{{ collector.app_id }}</td>
-     </tr>
-   {% if not collector.maintenance %}
-     <tr>
-       <th>Pocet pozadavku celkem</th>
-       <td>{{ collector.getRequestCount() }}</td>
-     </tr>
-       <th>Celkovy cas</th>
-       <td>{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</td>
-     </tr>
-     <tr>
-       <th>Test mode</th>
-       <td>{{ collector.test_mode ? 'Yes':'No' }}</td>
-     </tr>
-     <tr>
-       <th>Komprese</th>
-       <td>{{ collector.compression ? 'Yes':'No' }}</td>
-     </tr>
-     <tr>
-       <th>WSDL cache</th>
-       <td>{{ collector.cache ? 'Yes':'No' }}</td>
-     </tr>
-     <tr>
-       <th>Role ID</th>
-       <td>{{ collector.role_id }}</td>
-     </tr>
-     <tr>
-       <th>Unit ID</th>
-       <td>{{ collector.unit_id }}</td>
-     </tr>
-     <tr>
-       <th>token</th>
-       <td>{{ collector.token }}</td>
-     </tr>
-     <tr>
-       <th>Je uzivatel prihlasen</th>
-       <td>{{ collector.is_logged_in ? 'Yes':'No' }}</td>
-     </tr>
-     <tr>
-       <th>Datum a cas odhlaseni</th>
-       <td>{{ collector.logout_date | date}}</td>
-     </tr>
-   {% endif %}
-   </table>
+    <h3>Nastaveni</h3>
+    <table>
+        <tr>
+            <th>App id</th>
+            <td>{{ collector.app_id }}</td>
+        </tr>
+        <tr>
+            <th>Test mode</th>
+            <td>{{ collector.test_mode ? 'Yes':'No' }}</td>
+        </tr>
+        <tr>
+            <th>Komprese</th>
+            <td>{{ collector.compression ? 'Yes':'No' }}</td>
+        </tr>
+        <tr>
+            <th>WSDL cache</th>
+            <td>{{ collector.cache ? 'Yes':'No' }}</td>
+        </tr>
+    </table>
 
-   {% for req in collector.getRequests() %}
-     {{ m.request(req.fname, req.args, req.trace, req.time, req.result, req.hasFailed, req.getExceptionString) }}
-   {% else %}
-       <p>Zadne pozadavky na server nebyly zasalny</p>
-   {% endfor %}
+    <h3>Login informace</h3>
+    <table>
+        {% if not collector.maintenance %}
+            <tr>
+                <th>Je uzivatel prihlasen</th>
+                <td>{{ collector.is_logged_in ? 'Yes':'No' }}</td>
+            </tr>
+            <tr>
+                <th>Datum a cas odhlaseni</th>
+                <td>{{ collector.logout_date | date }}</td>
+            </tr>
+            <tr>
+                <th>Role ID</th>
+                <td>{{ collector.role_id }}</td>
+            </tr>
+            <tr>
+                <th>Unit ID</th>
+                <td>{{ collector.unit_id }}</td>
+            </tr>
+            <tr>
+                <th>token</th>
+                <td>{{ collector.token }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th>Maintenance</th>
+            <td>{{ collector.maintenance ? 'Yes' : 'False' }}</td>
+        </tr>
+    </table>
+
+
+
+    {% if ((not collector.maintenance) and collector.is_logged_in) %}
+        <h3>Pozadavky na server</h3>
+        <table>
+            <tr>
+                <th>Pocet pozadavku celkem</th>
+                <td>{{ collector.getRequestCount() }}</td>
+            </tr>
+            <tr>
+                <th>Celkovy cas</th>
+                <td>{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</td>
+            </tr>
+        </table>
+
+        {% for req in collector.getRequests() %}
+            {{ m.request(req.fname, req.args, req.trace, req.time, req.result, req.hasFailed, req.getExceptionString) }}
+        {% else %}
+            <p>Zadne pozadavky na server nebyly zasalny</p>
+        {% endfor %}
+    {% endif %}
+
 {% endblock %}
 
 {% macro request(fname, args, trace, time, result, failure, exception_string) %}
 
-  <h3>{{fname}}</h3>
-  <p><b>Cas:</b> {{ (time * 1000) | number_format(2, '.', ',')  }} ms</p>
-
-  <h4>Uspech</h4>
-  <p>{{ failure ? 'No':'Yes' }}</p>
+  <h4>{{fname}}</h4>
+  <p>
+      <b>Cas:</b> {{ (time * 1000) | number_format(2, '.', ',')  }} ms
+      <b>Uspech:</b> {{ failure ? 'No':'Yes' }}
+  </p>
 
   {% if not failure %}
     <h4>Response</h4>
@@ -124,13 +139,13 @@
   {% endif %}
 
 
-  <h4>Argumenty</h4>
+  <h5>Argumenty</h5>
   <pre>
    {{ dump(args) }}
   </pre>
 
 
-  <h4>Stacktrace</h4>
+  <h5>Stacktrace</h5>
   <pre>
    {{ dump(trace) }}
   </pre>
