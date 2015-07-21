@@ -5,7 +5,6 @@ namespace SkautisBundle\Security\Authentication;
 
 use Doctrine\ORM\EntityManager;
 use SkautisBundle\Entity\DoctrineUserConnection;
-use SkautisBundle\Security\Authentication\SkautisUserConnectorInterface;
 
 class DoctrineUserConnector implements SkautisUserConnectorInterface
 {

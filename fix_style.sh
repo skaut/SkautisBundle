@@ -9,6 +9,9 @@ fixers="psr1,psr2,object_operator,operators_spaces,remove_leading_slash_use,spac
 
 
 #Fixni pouze soubory urcene ke commitu
-for file in $(git diff --name-only --cached); do
-    ./vendor/bin/php-cs-fixer fix "$file" --fixers="$fixers";
-done
+# $(git diff --name-only --cached); do
+# for file in $(find . -name "*php^")  do
+#     ./vendor/bin/php-cs-fixer fix "$file" --fixers="$fixers";
+# done
+
+find . -name "*\.php" -exec ./vendor/bin/php-cs-fixer fix {} --fixers="$fixers" \;

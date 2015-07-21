@@ -36,23 +36,23 @@ class SkautisFactory implements SecurityFactoryInterface
      */
     public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
     {
-        $providerId = 'skautis.security.authentication.provider.'.$id;
+        $providerId = 'skautis.security.authentication.provider.' . $id;
         $container
             ->setDefinition($providerId, new DefinitionDecorator('skautis.security.authentication.provider'))
             ->replaceArgument(0, new Reference($userProvider))
             ->replaceArgument(4, $config['autoregister']);
 
-        $listenerId = 'skautis.security.authentication.listener.'.$id;
+        $listenerId = 'skautis.security.authentication.listener.' . $id;
         $container->setDefinition($listenerId, new DefinitionDecorator('skautis.security.authentication.listener'))
             ->addMethodCall("setConfirm", [$config["confirm_auth"]]);
 
 
 
-        $entrypointId = 'skautis.security_authentication.skautis_entry_point.'.$id;
+        $entrypointId = 'skautis.security_authentication.skautis_entry_point.' . $id;
         $container
             ->setDefinition($entrypointId, new DefinitionDecorator('skautis.security_authentication.skautis_entry_point'));
 
-        return array($providerId, $listenerId, $entrypointId);
+        return [$providerId, $listenerId, $entrypointId];
     }
 
 
