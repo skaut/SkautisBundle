@@ -43,7 +43,10 @@ class SkautisProvider implements AuthenticationProviderInterface
         $user = null;
         try {
             $username = $this->userConnector->getUsername($token->getPersonId());
-            $user = $this->userProvider->loadUserByUsername($username);
+
+            if (!empty($username)) {
+                $user = $this->userProvider->loadUserByUsername($username);
+            }
         }
         catch (\Exception $e) {
             //@TODO kdyz ne autoregistrace tak throw znova?
