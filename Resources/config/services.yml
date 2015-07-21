@@ -87,7 +87,7 @@ services:
 
     skautis.security.authentication.listener:
         class: "%skautis.security.authentication.listener.class%"
-        arguments: ["@security.token_storage", "@security.authentication.manager", "@skautis"]
+        arguments: ["@security.token_storage", "@security.authentication.manager", "@skautis", "@session"]
         public: false
 
     skautis.security_authentication.skautis_logout_handler:

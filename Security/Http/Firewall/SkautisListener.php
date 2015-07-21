@@ -3,20 +3,18 @@
 namespace SkautisBundle\Security\Http\Firewall;
 
 use SkautisBundle\Security\Core\Authentication\Token\SkautisToken;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Skautis\Skautis;
-use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SkautisListener implements ListenerInterface
 {
+    const SKAUTIS_LOGIN_ID = "skautis_login_id";
+    const SKAUTIS_PERSON_ID = "skautis_person_id";
 
     /**
      * @var TokenStorageInterface
@@ -33,10 +31,16 @@ class SkautisListener implements ListenerInterface
      */
     protected $skautis;
 
+
     /**
-     * @var SkautisUserConnectorInterface
+     * @var bool
      */
-    protected $userConnector;
+    protected $confirm = true;
+
+    /**
+     * @var Session
+     */
+    protected $session;
 
     /**
      * SkautisListener constructor.
@@ -44,11 +48,12 @@ class SkautisListener implements ListenerInterface
      * @param AuthenticationManagerInterface $authenticationManager
      * @param Skautis $skautis
      */
-    public function __construct(TokenStorageInterface $tokenStorage, AuthenticationManagerInterface $authenticationManager, Skautis $skautis)
+    public function __construct(TokenStorageInterface $tokenStorage, AuthenticationManagerInterface $authenticationManager, Skautis $skautis, Session $session)
     {
         $this->tokenStorage = $tokenStorage;
         $this->authenticationManager = $authenticationManager;
         $this->skautis = $skautis;
+        $this->session = $session;
     }
 
 
@@ -58,21 +63,45 @@ class SkautisListener implements ListenerInterface
     public function handle(GetResponseEvent $event)
     {
         try {
-            $userDetail = $this->skautis->user->UserDetail();
+
+            if (!$this->skautis->getUser()->isLoggedIn($this->confirm)) {
+                return;
+            }
+
+            $loginId = $this->skautis->getUser()->getLoginId();
+            if ($loginId != $this->session->get(self::SKAUTIS_LOGIN_ID)) {
+                $userDetail = $this->skautis->user->UserDetail();
+                $personId = $userDetail->ID_Person;
+
+                $this->session->set(self::SKAUTIS_LOGIN_ID, $loginId);
+                $this->session->set(self::SKAUTIS_PERSON_ID, $personId);
+            }
+            else {
+                $personId = $this->session->get(self::SKAUTIS_PERSON_ID);
+            }
 
             $token = new SkautisToken();
-            $token->setPersonId($userDetail->ID_Person);
+            $token->setPersonId($personId);
 
             $authenticatedToken = $this->authenticationManager->authenticate($token);
             $this->tokenStorage->setToken($authenticatedToken);
 
         } catch (AuthenticationException $failed) {
             //@TODO Log error
-        } catch (\Exception $e) {
+        } catch (\Skautis\Exception $e) {
             //@TODO log skautis error
         }
 
-        //Anonymous authentication
+        //No exception to allow anonymous authentication
     }
+
+    /**
+     * @param boolean $confirm
+     */
+    public function setConfirm($confirm)
+    {
+        $this->confirm = $confirm;
+    }
+
 
 }

@@ -25,6 +25,9 @@ class SkautisFactory implements SecurityFactoryInterface
         $builder
             ->booleanNode("autoregister")
                 ->defaultFalse()
+            ->end()
+            ->booleanNode("confirm_auth")
+                ->defaultTrue()
             ->end();
     }
 
@@ -40,7 +43,9 @@ class SkautisFactory implements SecurityFactoryInterface
             ->replaceArgument(4, $config['autoregister']);
 
         $listenerId = 'skautis.security.authentication.listener.'.$id;
-        $container->setDefinition($listenerId, new DefinitionDecorator('skautis.security.authentication.listener'));
+        $container->setDefinition($listenerId, new DefinitionDecorator('skautis.security.authentication.listener'))
+            ->addMethodCall("setConfirm", [$config["confirm_auth"]]);
+
 
 
         $entrypointId = 'skautis.security_authentication.skautis_entry_point.'.$id;
