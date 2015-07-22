@@ -5,6 +5,9 @@ namespace SkautisBundle\Skautis\Wsdl\Decorator\Cache;
 use Skautis\Wsdl\Decorator\Cache\CacheInterface;
 use Doctrine\Common\Cache\Cache;
 
+/**
+ * Trida implementujici Skautis cache interface pomoci DoctrineCache
+ */
 class DoctrineCache implements CacheInterface
 {
 

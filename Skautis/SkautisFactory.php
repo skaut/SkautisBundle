@@ -6,13 +6,15 @@ use Skautis\Skautis;
 use Skautis\Wsdl\WsdlManager;
 use Skautis\User;
 
+/**
+ * Trida vytvarejici instanci \Skautis
+ */
 class SkautisFactory
 {
    /**
      * Vytvari objek skautisu a vola nastaveni
      *
      * @param WsdlManager      $wsdlManager
-     * @param AdapterInterface $sessionAdapter
      * @param bool             $debug
      *
      * @return Skautis
@@ -21,10 +23,10 @@ class SkautisFactory
     {
         $skautis = new Skautis($wsdlManager, $user);
 
-	if ($debug) {
+        if ($debug) {
             $skautis->enableDebugLog();
-	}
+        }
 
-	return $skautis;
+	    return $skautis;
     }
 }

@@ -2,10 +2,12 @@
 
 namespace SkautisBundle\Security\Authentication;
 
-
 use Doctrine\ORM\EntityManager;
 use SkautisBundle\Entity\DoctrineUserConnection;
 
+/**
+ * Trida pro propojeni symfony uzivatele se Skautis uzivatelem, ukladajici data pomoci Doctrine ORM
+ */
 class DoctrineUserConnector implements SkautisUserConnectorInterface
 {
 

@@ -15,7 +15,9 @@ class SkautisProcessor
      */
     protected $skautis;
 
-
+    /**
+     * @var \stdClass
+     */
     protected $user;
 
     public function __construct(Skautis $skautis)
@@ -23,6 +25,12 @@ class SkautisProcessor
         $this->skautis = $skautis;
     }
 
+    /**
+     * Prida informace k logu
+     *
+     * @param array $record
+     * @return array
+     */
     public function processRecord(array $record)
     {
 

@@ -5,6 +5,9 @@ namespace SkautisBundle\Skautis\Wsdl;
 use Skautis\Wsdl\WebServiceFactory;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+/**
+ * Trida pro vytvareni StopWatch instanci
+ */
 class StopwatchWebServiceFactory extends WebServiceFactory
 {
 

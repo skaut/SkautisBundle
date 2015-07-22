@@ -15,6 +15,9 @@ use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
+/**
+ * Pouziva se pro zahajeni prihlaseni
+ */
 class SkautisEntryPoint implements AuthenticationEntryPointInterface
 {
 
@@ -25,13 +28,11 @@ class SkautisEntryPoint implements AuthenticationEntryPointInterface
 
     /**
      * SkautisEntryPoint constructor.
-     * @param Skautis $skautis
      */
     public function __construct(Router $router)
     {
         $this->router = $router;
     }
-
 
     /**
      * @inheritdoc

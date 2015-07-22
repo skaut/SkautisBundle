@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
+/**
+ * Trida provadejici odhlaseni
+ */
 class SkautisLogoutHandler implements LogoutSuccessHandlerInterface
 {
 

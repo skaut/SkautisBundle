@@ -6,6 +6,9 @@ use Skautis\Wsdl\WebServiceFactoryInterface;
 use Skautis\Wsdl\Decorator\Cache\CacheInterface;
 use Skautis\Wsdl\Decorator\Cache\CacheDecorator;
 
+/**
+ * Trida pro pridavani cache decoratur na web service
+ */
 class CacheDecoratorFactory implements WebServiceFactoryInterface
 {
     /**

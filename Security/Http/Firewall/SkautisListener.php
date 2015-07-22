@@ -11,6 +11,9 @@ use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Skautis\Skautis;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+/**
+ * Cte requesty a zjistuje jestli ma byt uzivatel prihlasen
+ */
 class SkautisListener implements ListenerInterface
 {
     const SKAUTIS_LOGIN_ID = "skautis_login_id";
@@ -47,6 +50,7 @@ class SkautisListener implements ListenerInterface
      * @param TokenStorageInterface $tokenStorage
      * @param AuthenticationManagerInterface $authenticationManager
      * @param Skautis $skautis
+     * @param Session $session
      */
     public function __construct(TokenStorageInterface $tokenStorage, AuthenticationManagerInterface $authenticationManager, Skautis $skautis, Session $session)
     {
@@ -68,6 +72,7 @@ class SkautisListener implements ListenerInterface
                 return;
             }
 
+            //Kontrola ze uzivatel prihlaseny do skautisu je stejny jako uzivatel prihlaseny do symfony
             $loginId = $this->skautis->getUser()->getLoginId();
             if ($loginId != $this->session->get(self::SKAUTIS_LOGIN_ID)) {
                 $userDetail = $this->skautis->user->UserDetail();

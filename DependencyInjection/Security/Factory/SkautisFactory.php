@@ -9,6 +9,9 @@ use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
 
+/**
+ * Factory pro authentikacni system
+ */
 class SkautisFactory implements SecurityFactoryInterface
 {
 

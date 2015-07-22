@@ -5,6 +5,9 @@ namespace SkautisBundle\Skautis\Wsdl;
 use Skautis\Wsdl\WebService;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+/**
+ * Trida pro zobrazovani requestu v timeline panelu v profileru
+ */
 class StopwatchWebService extends WebService
 {
 

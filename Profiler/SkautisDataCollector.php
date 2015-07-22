@@ -3,11 +3,14 @@
 namespace SkautisBundle\Profiler;
 
 use Skautis\Skautis;
+use Skautis\SkautisQuery;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
+/**
+ * Sbira data o skautisu pro zobrazeni v profileru
+ */
 class SkautisDataCollector extends DataCollector
 {
 
@@ -21,21 +24,24 @@ class SkautisDataCollector extends DataCollector
         $this->skautis = $skautis;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-	$config = $this->skautis->getConfig();
+	    $config = $this->skautis->getConfig();
         $this->data = [
     	    'queries'           => $this->skautis->getDebugLog(),
             'app_id'            => $config->getAppId(),
-	    'test_mode'         => $config->isTestMode(),
-	    'cache'             => $config->getCache(),
-	    'compression'       => $config->getCompression(),
-	    'role_id'           => $this->skautis->getUser()->getRoleId(),
-	    'unit_id'           => $this->skautis->getUser()->getUnitId(),
-	    'token'             => $this->skautis->getUser()->getLoginId(),
-	    'is_logged_in'      => $this->skautis->getUser()->isLoggedIn(),
-	    'logout_date'       => $this->skautis->getUser()->getLogoutDate(),
-	    'maintenance'       => $this->skautis->isMaintenance(),
+	        'test_mode'         => $config->isTestMode(),
+	        'cache'             => $config->getCache(),
+	        'compression'       => $config->getCompression(),
+	        'role_id'           => $this->skautis->getUser()->getRoleId(),
+	        'unit_id'           => $this->skautis->getUser()->getUnitId(),
+	        'token'             => $this->skautis->getUser()->getLoginId(),
+	        'is_logged_in'      => $this->skautis->getUser()->isLoggedIn(),
+	        'logout_date'       => $this->skautis->getUser()->getLogoutDate(),
+	        'maintenance'       => $this->skautis->isMaintenance(),
         ];
     }
 
@@ -44,9 +50,22 @@ class SkautisDataCollector extends DataCollector
         return $this->data["$method"];
     }
 
+    /**
+     * Ziska vsechny SkautisQuery
+     * @return SkautisQuery[]
+     */
     public function getRequests()
     {
-	return $this->data['queries'];
+	    return $this->data['queries'];
+    }
+
+    /**
+     * Pocet requestu
+     * @return int
+     */
+    public function getRequestCount()
+    {
+	    return count($this->data['queries']);
     }
 
     /**
@@ -54,19 +73,17 @@ class SkautisDataCollector extends DataCollector
      */
     public function getTotalTime()
     {
-       $totalTime = 0;
-	foreach ($this->data['queries'] as $query) {
+        $totalTime = 0;
+        foreach ($this->data['queries'] as $query) {
             $totalTime += $query->time;
-	}
+        }
 
-	return $totalTime * 1000;
+        return $totalTime * 1000;
     }
 
-    public function getRequestCount()
-    {
-	return count($this->data['queries']);
-    }
-
+    /**
+     * @inheritdoc
+     */
     public function getName()
     {
         return 'skautis_collector';
