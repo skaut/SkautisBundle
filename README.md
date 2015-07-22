@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/skaut/SkautisBundle.svg?branch=2.x)](https://travis-ci.org/skaut/SkautisBundle)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/skaut/SkautisBundle/badges/quality-score.png?b=2.x)](https://scrutinizer-ci.com/g/skaut/SkautisBundle/?branch=2.x)[![Code Coverage](https://scrutinizer-ci.com/g/skaut/SkautisBundle/badges/coverage.png?b=2.x)](https://scrutinizer-ci.com/g/skaut/SkautisBundle/?branch=2.x)[![Latest Stable Version](https://poser.pugx.org/skautis/skautis-bundle/v/stable.svg)](https://packagist.org/packages/skautis/skautis-bundle) [![Latest Unstable Version](https://poser.pugx.org/skautis/skautis-bundle/v/unstable.svg)](https://packagist.org/packages/skautis/skautis-bundle) [![License](https://poser.pugx.org/skautis/skautis-bundle/license.svg)](https://packagist.org/packages/skautis/skautis-bundle)
+
+
 #SkautisBundle
 
 ##Co tento bundle nabizi
