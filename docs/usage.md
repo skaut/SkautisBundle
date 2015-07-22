@@ -1,5 +1,6 @@
 #Pouziti
-Po uspesne Instalaci a Konfiguraci bude v Dependency Injection Containeru existovat plne nakonfigurovana sluzba ``skautis``.
+Po uspesne Instalaci a Konfiguraci bude v Service Containeru existovat plne nakonfigurovana sluzba ``skautis``.
+Vice informaci o [Symfony Service Containeru](http://symfony.com/doc/current/book/service_container.html)
 
 ##Pouziti v controlleru
 V pripade ze pouzivate defaultni symfony controller staci v jakekoliv akci pristoupit k ``$this->get('skautis')``

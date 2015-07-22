@@ -1,6 +1,7 @@
 #Symfony login
 Symfony ma vlastni authentizacni system, zde se dozvite jak ho propojit se skautisem.
 Navic vetsine aplikaci nebude stacit pouze uzivatel ze skautisu. Bude vyzadovat lokalni data, napriklad pro mapovani autoru clanku blogu v relacni databazi.
+Authentikace je jedna z neslozitejsich komponent Symfony a zaroven jedna z nejdulezitejsich. Doporucuji precist si o [Symfony Security](http://symfony.com/doc/current/book/security.html)
 
 ##Instalace
 Po nainstalovani bundle je potreba vytvorit a nakonfigurovat novy firewall.

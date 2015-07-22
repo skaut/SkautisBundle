@@ -1,7 +1,6 @@
 #Instalace
 
 ##Vlozeni do symfony
-
 Detailni informace o tom jak pracovat s Bundle najdete v [Symfony navodu na instalace bundle](http://symfony.com/doc/current/cookbook/bundles/installation.html)
 
 Pridejte zavislost do [composeru](https://getcomposer.org/doc/00-intro.md)
