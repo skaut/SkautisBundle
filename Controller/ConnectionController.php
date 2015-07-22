@@ -2,8 +2,10 @@
 
 namespace SkautisBundle\Controller;
 
-use SkautisBundle\EventDispatcher\Event\SkautisConnectEvent;
-use SkautisBundle\EventDispatcher\Event\SkautisDisconnectEvent;
+use SkautisBundle\EventDispatcher\Event\SkautisAfterConnectEvent;
+use SkautisBundle\EventDispatcher\Event\SkautisAfterDisconnectEvent;
+use SkautisBundle\EventDispatcher\Event\SkautisPreConnectEvent;
+use SkautisBundle\EventDispatcher\Event\SkautisPreDisconnectEvent;
 use SkautisBundle\Security\Authentication\SkautisUserConnectorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,6 +20,9 @@ class ConnectionController extends Controller
      */
     public function connectAction() {
 
+        $event = new SkautisPreConnectEvent();
+        $this->get("event_dispatcher")->dispatch(SkautisPreConnectEvent::EVENT_NAME, $event);
+
         $userDetail = $this->get("skautis")->user->UserDetail();
         $personId = $userDetail->ID_Person;
 
@@ -31,8 +36,8 @@ class ConnectionController extends Controller
         $connector = $this->get("skautis.security.authentication.connector");
         $connector->connect($personId, $user->getUsername());
 
-        $event = new SkautisConnectEvent();
-        $this->get("event_dispatcher")->dispatch(SkautisConnectEvent::EVENT_NAME, $event);
+        $event = new SkautisAfterConnectEvent();
+        $this->get("event_dispatcher")->dispatch(SkautisAfterConnectEvent::EVENT_NAME, $event);
 
         return $this->redirectToRoute("homepage");
     }
@@ -41,6 +46,9 @@ class ConnectionController extends Controller
      * Rozpoji uzivatele
      */
     public function disconnectAction() {
+
+        $event = new SkautisPreDisconnectEvent();
+        $this->get("event_dispatcher")->dispatch(SkautisPreDisconnectEvent::EVENT_NAME, $event);
 
         $user = $this->getUser();
         if (!$user instanceof UserInterface) {
@@ -52,8 +60,8 @@ class ConnectionController extends Controller
         $connector = $this->get("skautis.security.authentication.connector");
         $connector->disconnect($user->getUsername());
 
-        $event = new SkautisDisconnectEvent();
-        $this->get("event_dispatcher")->dispatch(SkautisDisconnectEvent::EVENT_NAME, $event);
+        $event = new SkautisAfterDisconnectEvent();
+        $this->get("event_dispatcher")->dispatch(SkautisAfterDisconnectEvent::EVENT_NAME, $event);
 
         return $this->redirectToRoute("homepage");
     }
