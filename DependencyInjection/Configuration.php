@@ -48,6 +48,14 @@ class Configuration implements ConfigurationInterface
         ->integerNode('request_cache_ttl')
             ->defaultValue(0)
             ->info("Request cache time to live")
+        ->end()
+        ->scalarNode('after_login_redirect')
+            ->defaultValue('homepage')
+            ->info("Route to be redirected to after login")
+        ->end()
+        ->scalarNode('after_logout_redirect')
+            ->defaultValue('homepage')
+            ->info("Route to be redirected to after logout")
         ->end();
 
         return $treeBuilder;
