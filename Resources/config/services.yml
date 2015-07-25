@@ -102,7 +102,7 @@ services:
 
     skautis.security.authentication.connector:
         class: "%skautis.security.authentication.connector_class%"
-        arguments: [@?doctrine.orm.entity_manager]
+        arguments: [@doctrine.orm.entity_manager]
 
 #    skautis.security.authentication.registrator:
 #        abstract: true
