@@ -82,7 +82,7 @@ services:
 
     skautis.security.authentication.provider:
         class: "%skautis.security.authentication.provider_class%"
-        arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces", "@skautis.security.authentication.registrator", "@skautis.security.authentication.connector", false]
+        arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces", "@skautis.security.authentication.connector", "@?skautis.security.authentication.registrator", false]
         public: false
 
     skautis.security.authentication.listener:
@@ -102,10 +102,10 @@ services:
 
     skautis.security.authentication.connector:
         class: "%skautis.security.authentication.connector_class%"
-        arguments: [@doctrine.orm.entity_manager]
+        arguments: [@?doctrine.orm.entity_manager]
 
-    skautis.security.authentication.registrator:
-        abstract: true
+#    skautis.security.authentication.registrator:
+#        abstract: true
 
     kernel.listener.your_listener_name:
         class: SkautisBundle\EventListener\SkautisExceptionListener

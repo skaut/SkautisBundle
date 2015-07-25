@@ -20,7 +20,7 @@ class SkautisProvider implements AuthenticationProviderInterface
     private $enableAutoRegister = true;
 
 
-    public function __construct(UserProviderInterface $userProvider, $cacheDir, UserRegistratorInterface $userRegistrator, SkautisUserConnectorInterface $userConnector, $enableAutoregister)
+    public function __construct(UserProviderInterface $userProvider, $cacheDir, SkautisUserConnectorInterface $userConnector, UserRegistratorInterface $userRegistrator = null, $enableAutoregister = false)
     {
         $this->userProvider = $userProvider;
         $this->cacheDir     = $cacheDir;
@@ -54,6 +54,11 @@ class SkautisProvider implements AuthenticationProviderInterface
 
 
         if (!$user && $this->enableAutoRegister) {
+
+            if (!$this->userRegistrator) {
+                throw new \Exception("No registrator set while autoregistration enabled"); //@TODO custom exception
+            }
+
             $username = $this->userRegistrator->registerUser();
             $this->userConnector->connect($token->getPersonId(), $username);
             //@TODO log registration
