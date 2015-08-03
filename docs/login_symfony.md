@@ -6,7 +6,7 @@ Authentikace je jedna z neslozitejsich komponent Symfony a zaroven jedna z nejdu
 ##Instalace
 Po nainstalovani bundle je potreba vytvorit a nakonfigurovat novy firewall.
 ```yaml
-//security.yml
+#security.yml
 security:
     providers:
     
@@ -39,7 +39,18 @@ K tomu staci uzivatele, prihlaseneho jak do skautisu tak do aplikace presmerovat
 Pro zjednoduseni veci pro uzivatele je implementovan mechanizmus autoregistrace. Pri prihlaseni do skautisu je automaticky vytvoren symfony uzivatel a propojen.
 Vytvoreni Symfony uzivatele je vzdy specificke pro aplikaci, proto je nutne zprostredkovat sluzbu ```skautis.security.authentication.registrator``` ktera implementuje ```UserRegistratorInterface```
 
-Priklad implementace:
+Autoregistraci je potreba povolit v *security.yml* jak je videt v predchozim uryvku konfigurace.
+
+####Friends Of Symfony integrace
+SkautisBundle nabizi jiz pripravenou autoregistraci pro [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle), staci pridat alias.
+```yaml
+#VaseBundle/Resources/config/services.yml
+services:
+    skautis.security.authentication.registrator:
+        alias: "skautis.security.authentication.fos_user_registrator"
+```
+
+####Priklad implementace
 ```php
 class DoctrineRegistrator implements  UserRegistratorInterface
 {

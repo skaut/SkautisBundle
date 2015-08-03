@@ -10,6 +10,7 @@ parameters:
     skautis.user_class: 'Skautis\User'
     skautis.cache_class: 'SkautisBundle\Skautis\Wsdl\Decorator\Cache\DoctrineCache'
     skautis.cache.ttl: 0
+    skautis.security.authentication.fos_user_registrator.class: 'SkautisBundle\Security\Authentication\FosUserRegistrator'
     skautis.user.provider_class: 'asd'
     skautis.security.authentication.connector_class: 'SkautisBundle\Security\Authentication\DoctrineUserConnector'
     skautis.security_authentication.skautis_entry_point_class: 'SkautisBundle\Security\Http\EntryPoint\SkautisEntryPoint'
@@ -75,6 +76,10 @@ services:
         arguments:  ["@skautis"]
         tags:
             - { name: monolog.processor, method: processRecord, channel: skautis }
+
+    skautis.security.authentication.fos_user_registrator:
+        class: "%skautis.security.authentication.fos_user_registrator.class%"
+        arguments: ["@skautis", "@fos_user.user_manager"]
 
     skautis.user.provider:
         class: "%skautis.user.provider_class%"

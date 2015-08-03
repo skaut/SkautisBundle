@@ -11,7 +11,7 @@ namespace SkautisBundle\Security\Http\EntryPoint;
 use Skautis\Skautis;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
@@ -22,14 +22,14 @@ class SkautisEntryPoint implements AuthenticationEntryPointInterface
 {
 
     /**
-     * @var Router
+     * @var RouterInterface
      */
     protected $router;
 
     /**
      * SkautisEntryPoint constructor.
      */
-    public function __construct(Router $router)
+    public function __construct(RouterInterface $router)
     {
         $this->router = $router;
     }
