@@ -5,9 +5,11 @@ namespace SkautisBundle\Security\Authentication;
 
 use Skautis\Skautis;
 use FOS\UserBundle\Model\UserManager;
+use Symfony\Component\Security\Core\Util\SecureRandom;
 
 class FosUserRegistrator implements  UserRegistratorInterface
 {
+    const NUMBER_OF_RANDOM_BYTES = 10;
 
     /**
      * @var Skautis
@@ -41,12 +43,24 @@ class FosUserRegistrator implements  UserRegistratorInterface
         $user = $this->userManager->createUser();
         $user->setEnabled(true);
         $user->setUsername($data->UserName);
-        $user->setPassword("SKAUTIS-REGISTERED"); //@TODO some random
+        $user->setPassword($this->generatePassword());
         $user->setEmail("email@email.cz");
 
         $this->userManager->updateUser($user);
 
         return $user->getUsername();
+    }
+
+    /**
+     * Generate password for newly registered user
+     * @return string
+     */
+    protected function generatePassword()
+    {
+        $generator = new SecureRandom();
+        $randomBytes = $generator->nextBytes(self::NUMBER_OF_RANDOM_BYTES);
+
+        return base64_encode($randomBytes);
     }
 
 }
