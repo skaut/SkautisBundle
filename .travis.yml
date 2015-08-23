@@ -1,5 +1,8 @@
 language: php
 
+## Run on container environment
+sudo: false
+
 php:
   - 5.5
   - 5.6
@@ -16,10 +19,15 @@ before_install:
   - composer self-update
 
 install:
-  - composer install -o --prefer-source
+  - composer install -o --prefer-dist
 
 script: phpunit --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
