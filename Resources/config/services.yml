@@ -79,7 +79,7 @@ services:
 
     skautis.security.authentication.fos_user_registrator:
         class: "%skautis.security.authentication.fos_user_registrator.class%"
-        arguments: ["@skautis", "@fos_user.user_manager"]
+        arguments: ["@skautis", "@?fos_user.user_manager"]
 
     skautis.user.provider:
         class: "%skautis.user.provider_class%"
