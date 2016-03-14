@@ -14,7 +14,7 @@ skautis_logout:
     methods:  [GET]
 
 skautis_logout_confirm:
-    path:     /skautis/authlogout
+    path:     /skautis/auth/logout
     defaults: { _controller: SkautisBundle:Auth:logoutConfirm }
     methods:  [POST]
 
