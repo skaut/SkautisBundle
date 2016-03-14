@@ -1,34 +1,40 @@
 {
-    "name": "skautis/skautis-bundle",
-    "description": "Bundle for Skautis integration",
-    "keywords": ["skautis", "symfony", "bundle"],
-    "type": "library",
-    "require": {
-	"php": ">=5.5",
-	"psr/log": "~1.0",
-        "skautis/skautis": "~2.0",
-	    "symfony/symfony": "~2.7",
-        "doctrine/doctrine-bundle": "~1.3"
-    },
-    "require-dev": {
-        "fabpot/php-cs-fixer": "@stable"
-    },
-    "autoload": {
-	"psr-4": { "SkautisBundle\\": "" }
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Jindrich Pilar",
-            "email": "pilar.jindrich@gmail.com"
-        }
-    ],
-    "suggest": {
-        "doctrine/doctrine-cache-bundle": "Pro cachovani pozadavku na server SkautISu"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "ln -s ../../fix_syle.sh .git/hooks/pre-commit"
-        ]
+  "name": "skaut/skautis-bundle",
+  "description": "Bundle for Skautis integration",
+  "keywords": [
+    "skautis",
+    "symfony",
+    "bundle"
+  ],
+  "type": "library",
+  "require": {
+    "php": ">=5.4",
+    "psr/log": "~1.0",
+    "skautis/skautis": "2.0.*",
+    "symfony/symfony": "2.8.*",
+    "doctrine/doctrine-bundle": "~1.4"
+  },
+  "require-dev": {
+    "fabpot/php-cs-fixer": "v1.11.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SkautisBundle\\": ""
     }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jindrich Pilar",
+      "email": "pilar.jindrich@gmail.com"
+    }
+  ],
+  "suggest": {
+    "doctrine/doctrine-cache-bundle": "Pro cachovani pozadavku na server SkautISu"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "ln -s ../../fix_syle.sh .git/hooks/pre-commit"
+    ]
+  }
 }
