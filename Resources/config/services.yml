@@ -1,45 +1,30 @@
 parameters:
-    skautis.skautis_class: 'Skautis\Skautis'
-    skautis.skautis_factory_class: 'SkautisBundle\Skautis\SkautisFactory'
-    skautis.ws_class: 'SkautisBundle\Skautis\Wsdl\StopwatchWebService'
-    skautis.ws_factory_class: 'SkautisBundle\Skautis\Wsdl\StopwatchWebServiceFactory'
-    skautis.session_adapter_class: 'SkautisBundle\Skautis\SessionAdapter'
-    skautis.data_collector_class: 'SkautisBundle\Profiler\SkautisDataCollector'
-    skautis.config_class: 'Skautis\Config'
-    skautis.wsdl_manager_class: 'Skautis\Wsdl\WsdlManager'
-    skautis.user_class: 'Skautis\User'
     skautis.cache_class: 'SkautisBundle\Skautis\Wsdl\Decorator\Cache\DoctrineCache'
     skautis.cache.ttl: 0
-    skautis.security.authentication.fos_user_registrator.class: 'SkautisBundle\Security\Authentication\FosUserRegistrator'
     skautis.user.provider_class: 'asd'
-    skautis.security.authentication.connector_class: 'SkautisBundle\Security\Authentication\DoctrineUserConnector'
-    skautis.security_authentication.skautis_entry_point_class: 'SkautisBundle\Security\Http\EntryPoint\SkautisEntryPoint'
-    skautis.security_authentication.skautis_logout_handler_class: 'SkautisBundle\Security\Http\Logout\SkautisLogoutHandler'
-    skautis.security.authentication.listener_class: 'SkautisBundle\Security\Http\Firewall\SkautisListener'
-    skautis.security.authentication.provider_class: 'SkautisBundle\Security\Core\Authentication\Provider\SkautisProvider'
-    skautis.monolog.processor_class: 'SkautisBundle\Monolog\SkautisProcessor'
+
 
 services:
     skautis.ws_factory:
-        class: "%skautis.ws_factory_class%"
+        class: 'SkautisBundle\Skautis\Wsdl\StopwatchWebServiceFactory'
         arguments:
-            - "%skautis.ws_class%"
+            - 'SkautisBundle\Skautis\Wsdl\StopwatchWebService'
         calls:
             - [ setStopwatch, ["@debug.stopwatch"]]
 
     skautis.wsdl_manager:
-        class: "%skautis.wsdl_manager_class%"
+        class: 'Skautis\Wsdl\WsdlManager'
         arguments:
             - "@skautis.ws_factory"
             - "@skautis.config"
 
     skautis.session_adapter:
-        class: "%skautis.session_adapter_class%"
+        class: 'SkautisBundle\Skautis\SessionAdapter'
         arguments:
             - "@session"
 
     skautis.config:
-        class: "%skautis.config_class%"
+        class: 'Skautis\Config'
         arguments:
             - "%skautis.app_id%"
             - "%skautis.test_mode%"
@@ -48,16 +33,16 @@ services:
             - "%skautis.wsdl.compression%"
 
     skautis.user:
-        class: "%skautis.user_class%"
+        class: 'Skautis\User'
         arguments:
             - "@skautis.wsdl_manager"
             - "@skautis.session_adapter"
 
     skautis.skautis_factory:
-        class: '%skautis.skautis_factory_class%'
+        class: 'SkautisBundle\Skautis\SkautisFactory'
 
     skautis:
-        class: "%skautis.skautis_class%"
+        class: "Skautis\Skautis"
         factory: ["@skautis.skautis_factory", 'createSkautis']
         arguments:
             - "@skautis.wsdl_manager"
@@ -65,20 +50,20 @@ services:
             - "%skautis.profiler%"
 
     data_collector.skautis_collector:
-        class: "%skautis.data_collector_class%"
+        class: 'SkautisBundle\Profiler\SkautisDataCollector'
         arguments:
             - "@skautis"
         tags:
             - { name: data_collector, template: "SkautisBundle:Collector:template", id: "skautis_collector"}
 
     skautis.monolog.processor:
-        class: "%skautis.monolog.processor_class%"
+        class: 'SkautisBundle\Monolog\SkautisProcessor'
         arguments:  ["@skautis"]
         tags:
             - { name: monolog.processor, method: processRecord, channel: skautis }
 
     skautis.security.authentication.fos_user_registrator:
-        class: "%skautis.security.authentication.fos_user_registrator.class%"
+        class: 'SkautisBundle\Security\Authentication\FosUserRegistrator'
         arguments: ["@skautis", "@?fos_user.user_manager"]
 
     skautis.user.provider:
@@ -86,27 +71,27 @@ services:
         public: false
 
     skautis.security.authentication.provider:
-        class: "%skautis.security.authentication.provider_class%"
+        class: 'SkautisBundle\Security\Core\Authentication\Provider\SkautisProvider'
         arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces", "@skautis.security.authentication.connector", "@?skautis.security.authentication.registrator", false]
         public: false
 
     skautis.security.authentication.listener:
-        class: "%skautis.security.authentication.listener_class%"
+        class: 'SkautisBundle\Security\Http\Firewall\SkautisListener'
         arguments: ["@security.token_storage", "@security.authentication.manager", "@skautis", "@session"]
         public: false
 
     skautis.security_authentication.skautis_logout_handler:
-        class:  "%skautis.security_authentication.skautis_logout_handler_class%"
+        class:  'SkautisBundle\Security\Http\Logout\SkautisLogoutHandler'
         arguments: [ "@skautis" ]
         public: false
 
     skautis.security_authentication.skautis_entry_point:
-        class: "%skautis.security_authentication.skautis_entry_point_class%"
+        class: 'SkautisBundle\Security\Http\EntryPoint\SkautisEntryPoint'
         arguments: [ "@router" ]
         public: false
 
     skautis.security.authentication.connector:
-        class: "%skautis.security.authentication.connector_class%"
+        class: 'SkautisBundle\Security\Authentication\DoctrineUserConnector'
         arguments: ["@doctrine.orm.entity_manager"]
 
 #    skautis.security.authentication.registrator:
