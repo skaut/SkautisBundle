@@ -25,18 +25,18 @@ services:
         arguments:
             - "%skautis.ws_class%"
         calls:
-            - [ setStopwatch, [@debug.stopwatch]]
+            - [ setStopwatch, ["@debug.stopwatch"]]
 
     skautis.wsdl_manager:
         class: "%skautis.wsdl_manager_class%"
         arguments:
-            - @skautis.ws_factory
-            - @skautis.config
+            - "@skautis.ws_factory"
+            - "@skautis.config"
 
     skautis.session_adapter:
         class: "%skautis.session_adapter_class%"
         arguments:
-            - @session
+            - "@session"
 
     skautis.config:
         class: "%skautis.config_class%"
@@ -50,24 +50,24 @@ services:
     skautis.user:
         class: "%skautis.user_class%"
         arguments:
-            - @skautis.wsdl_manager
-            - @skautis.session_adapter
+            - "@skautis.wsdl_manager"
+            - "@skautis.session_adapter"
 
     skautis.skautis_factory:
         class: '%skautis.skautis_factory_class%'
 
     skautis:
         class: "%skautis.skautis_class%"
-        factory: [@skautis.skautis_factory, 'createSkautis']
+        factory: ["@skautis.skautis_factory", 'createSkautis']
         arguments:
-            - @skautis.wsdl_manager
-            - @skautis.user
+            - "@skautis.wsdl_manager"
+            - "@skautis.user"
             - "%skautis.profiler%"
 
     data_collector.skautis_collector:
         class: "%skautis.data_collector_class%"
         arguments:
-            - @skautis
+            - "@skautis"
         tags:
             - { name: data_collector, template: "SkautisBundle:Collector:template", id: "skautis_collector"}
 
@@ -102,12 +102,12 @@ services:
 
     skautis.security_authentication.skautis_entry_point:
         class: "%skautis.security_authentication.skautis_entry_point_class%"
-        arguments: [ @router ]
+        arguments: [ "@router" ]
         public: false
 
     skautis.security.authentication.connector:
         class: "%skautis.security.authentication.connector_class%"
-        arguments: [@doctrine.orm.entity_manager]
+        arguments: ["@doctrine.orm.entity_manager"]
 
 #    skautis.security.authentication.registrator:
 #        abstract: true
