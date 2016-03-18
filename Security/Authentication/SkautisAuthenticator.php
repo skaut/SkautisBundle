@@ -161,13 +161,4 @@ class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements Guar
     {
         return false;
     }
-
-    /**
-     * @param boolean $confirm
-     */
-    public function setConfirm($confirm)
-    {
-        //@TODO constructor?
-        $this->confirm = $confirm;
-    }
 }
