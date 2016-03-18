@@ -22,7 +22,7 @@ class SkautisExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        
         $container->setParameter('skautis.app_id', $config['app_id']);
         $container->setParameter('skautis.test_mode', $config['test_mode']);
         $container->setParameter('skautis.profiler', $config['profiler']);
@@ -31,6 +31,19 @@ class SkautisExtension extends Extension
         $container->setParameter('skautis.doctrine.cache.ttl', $config['request_cache_ttl']);
         $container->setParameter('skautis.after_login_redirect', $config['after_login_redirect']);
         $container->setParameter('skautis.after_logout_redirect', $config['after_logout_redirect']);
+        $container->setParameter('skautis.auth.enable_connector', $config['auth']['enable_connector']);
+        $container->setParameter('skautis.auth.enable_autoregister', $config['auth']['enable_autoregister']);
+        $container->setParameter('skautis.auth.enable_skautis_anonymous', $config['auth']['enable_skautis_anonymous']);
+        $container->setParameter('skautis.auth.force_confirm_auth', $config['auth']['force_confirm_auth']);
+
+        if ($config['auth']['enable_connector']) {
+            $container->setAlias("skautis.security.authentication.connector", $config['connector_service']);
+        }
+
+        if ($config['auth']['enable_autoregister']) {
+            $container->setAlias("skautis.security.authentication.connector", $config['registrator_service']);
+        }
+
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
@@ -49,3 +62,4 @@ class SkautisExtension extends Extension
         }
     }
 }
+

@@ -73,7 +73,7 @@ services:
         public: false
 
 
-    skautis.security.authentication.connector:
+    skautis.security.authentication.doctrine_connector:
         class: 'SkautisBundle\Security\Authentication\Connector\DoctrineUserConnector'
         arguments: ["@doctrine.orm.entity_manager"]
 
@@ -81,9 +81,9 @@ services:
     skautis.user_loader:
         class: 'SkautisBundle\Security\Authentication\UserLoader'
         arguments:
-            - false
+            - "%skautis.auth.enable_connector%"
             - "@?skautis.security.authentication.connector"
-            - false
+            - "%skautis.auth.enable_autoregister%"
             - "@?skautis.security.authentication.registrator"
 
 
@@ -94,8 +94,8 @@ services:
             - "@router"
             - "@session"
             - "@skautis.user_loader"
-            - false
-            - true
+            - "%skautis.auth.force_confirm_auth%"
+            - "%skautis.auth.enable_skautis_anonymous%"
 
     kernel.listener.your_listener_name:
         class: SkautisBundle\EventListener\SkautisExceptionListener
