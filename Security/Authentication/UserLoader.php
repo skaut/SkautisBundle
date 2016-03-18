@@ -3,7 +3,7 @@
 namespace SkautisBundle\Security\Authentication;
 
 
-use SkautisBundle\Security\Authentication\Connector\SkautisUserConnectorInterface;
+use SkautisBundle\Security\Authentication\Connector\UserConnectorInterface;
 use SkautisBundle\Security\Authentication\Registrator\UserRegistratorInterface;
 
 class UserLoader
@@ -13,7 +13,7 @@ class UserLoader
      */
     private $enableConnector ;
     /**
-     * @var SkautisUserConnectorInterface
+     * @var UserConnectorInterface
      */
     private $userConnector;
 
@@ -30,11 +30,11 @@ class UserLoader
     /**
      * UserLoader constructor.
      * @param bool $enableConnector
-     * @param SkautisUserConnectorInterface $userConnector
+     * @param UserConnectorInterface $userConnector
      * @param bool $enableAutoRegister
      * @param UserRegistratorInterface $userRegistrator
      */
-    public function __construct($enableConnector = false, SkautisUserConnectorInterface $userConnector = null, $enableAutoRegister = false, UserRegistratorInterface $userRegistrator = null)
+    public function __construct($enableConnector = false, UserConnectorInterface $userConnector = null, $enableAutoRegister = false, UserRegistratorInterface $userRegistrator = null)
     {
         $this->enableConnector = $enableConnector;
         $this->userConnector = $userConnector;

@@ -6,7 +6,7 @@ use SkautisBundle\EventDispatcher\Event\SkautisAfterConnectEvent;
 use SkautisBundle\EventDispatcher\Event\SkautisAfterDisconnectEvent;
 use SkautisBundle\EventDispatcher\Event\SkautisPreConnectEvent;
 use SkautisBundle\EventDispatcher\Event\SkautisPreDisconnectEvent;
-use SkautisBundle\Security\Authentication\Connector\SkautisUserConnectorInterface;
+use SkautisBundle\Security\Authentication\Connector\UserConnectorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -32,7 +32,7 @@ class ConnectionController extends Controller
             return $this->redirectToRoute("homepage");
         }
 
-        /** @var SkautisUserConnectorInterface $connector */
+        /** @var UserConnectorInterface $connector */
         $connector = $this->get("skautis.security.authentication.connector");
         $connector->connect($personId, $user->getUsername());
 
@@ -56,7 +56,7 @@ class ConnectionController extends Controller
             return $this->redirectToRoute("homepage");
         }
 
-        /** @var SkautisUserConnectorInterface $connector */
+        /** @var UserConnectorInterface $connector */
         $connector = $this->get("skautis.security.authentication.connector");
         $connector->disconnect($user->getUsername());
 

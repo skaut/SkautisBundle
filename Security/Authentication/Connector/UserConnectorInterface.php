@@ -5,7 +5,7 @@ namespace SkautisBundle\Security\Authentication\Connector;
 /**
  * Interface pro propojeni Symfony uzivatele a Skautis uzivatele
  */
-interface SkautisUserConnectorInterface
+interface UserConnectorInterface
 {
     /**
      * Ziska jmeno symfony uzivatele ktery je propojen s danym $personId
