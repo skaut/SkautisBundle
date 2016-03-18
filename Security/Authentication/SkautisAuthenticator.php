@@ -71,7 +71,6 @@ class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements Guar
         $this->userLoader = $userLoader;
         $this->confirm = $confirm;
         $this->anonymousSkautLogin = $anonymousSkautLogin;
-        \dump($this);
     }
 
     /**
