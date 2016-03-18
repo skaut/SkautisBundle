@@ -63,39 +63,39 @@ services:
             - { name: monolog.processor, method: processRecord, channel: skautis }
 
     skautis.security.authentication.fos_user_registrator:
-        class: 'SkautisBundle\Security\Authentication\FosUserRegistrator'
+        class: 'SkautisBundle\Security\Authentication\Registrator\FosUserRegistrator'
         arguments: ["@skautis", "@?fos_user.user_manager"]
 
-    skautis.user.provider:
-        class: "%skautis.user.provider_class%"
-        public: false
-
-    skautis.security.authentication.provider:
-        class: 'SkautisBundle\Security\Core\Authentication\Provider\SkautisProvider'
-        arguments: ["@skautis.user.provider", "%kernel.cache_dir%/security/nonces", "@skautis.security.authentication.connector", "@?skautis.security.authentication.registrator", false]
-        public: false
-
-    skautis.security.authentication.listener:
-        class: 'SkautisBundle\Security\Http\Firewall\SkautisListener'
-        arguments: ["@security.token_storage", "@security.authentication.manager", "@skautis", "@session"]
-        public: false
 
     skautis.security_authentication.skautis_logout_handler:
         class:  'SkautisBundle\Security\Http\Logout\SkautisLogoutHandler'
         arguments: [ "@skautis" ]
         public: false
 
-    skautis.security_authentication.skautis_entry_point:
-        class: 'SkautisBundle\Security\Http\EntryPoint\SkautisEntryPoint'
-        arguments: [ "@router" ]
-        public: false
 
     skautis.security.authentication.connector:
-        class: 'SkautisBundle\Security\Authentication\DoctrineUserConnector'
+        class: 'SkautisBundle\Security\Authentication\Connector\DoctrineUserConnector'
         arguments: ["@doctrine.orm.entity_manager"]
 
-#    skautis.security.authentication.registrator:
-#        abstract: true
+
+    skautis.user_loader:
+        class: 'SkautisBundle\Security\Authentication\UserLoader'
+        arguments:
+            - false
+            - "@?skautis.security.authentication.connector"
+            - false
+            - "@?skautis.security.authentication.registrator"
+
+
+    skautis.authenticator:
+        class: 'SkautisBundle\Security\Authentication\SkautisAuthenticator'
+        arguments:
+            - "@skautis"
+            - "@router"
+            - "@session"
+            - "@skautis.user_loader"
+            - false
+            - true
 
     kernel.listener.your_listener_name:
         class: SkautisBundle\EventListener\SkautisExceptionListener

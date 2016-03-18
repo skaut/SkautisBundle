@@ -1,6 +1,6 @@
 <?php
 
-namespace SkautisBundle\Security\Authentication;
+namespace SkautisBundle\Security\Authentication\Connector;
 
 /**
  * Interface pro propojeni Symfony uzivatele a Skautis uzivatele

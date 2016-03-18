@@ -1,10 +1,11 @@
 <?php
 
-namespace SkautisBundle\Security\Authentication;
+namespace SkautisBundle\Security\Authentication\Registrator;
 
 
 use Skautis\Skautis;
 use FOS\UserBundle\Model\UserManager;
+use SkautisBundle\Security\Authentication\Registrator\UserRegistratorInterface;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
 class FosUserRegistrator implements  UserRegistratorInterface

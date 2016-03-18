@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SkautisBundle\Security\Authentication;
+namespace SkautisBundle\Security\Authentication\Registrator;
 
 /**
  * Registracni trida, pouzita pro autoregistraci

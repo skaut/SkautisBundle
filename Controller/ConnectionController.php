@@ -6,7 +6,7 @@ use SkautisBundle\EventDispatcher\Event\SkautisAfterConnectEvent;
 use SkautisBundle\EventDispatcher\Event\SkautisAfterDisconnectEvent;
 use SkautisBundle\EventDispatcher\Event\SkautisPreConnectEvent;
 use SkautisBundle\EventDispatcher\Event\SkautisPreDisconnectEvent;
-use SkautisBundle\Security\Authentication\SkautisUserConnectorInterface;
+use SkautisBundle\Security\Authentication\Connector\SkautisUserConnectorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\User\UserInterface;
 
