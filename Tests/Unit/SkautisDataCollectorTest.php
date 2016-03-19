@@ -1,5 +1,7 @@
 <?php
 
+namespace Test\SkautisBundle;
+
 use Skautis\Skautis;
 use Skautis\Config;
 use Skautis\User;
