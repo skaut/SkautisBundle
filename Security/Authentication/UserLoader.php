@@ -3,6 +3,7 @@
 namespace SkautisBundle\Security\Authentication;
 
 
+use SkautisBundle\Exception\ConfigurationException;
 use SkautisBundle\Security\Authentication\Connector\UserConnectorInterface;
 use SkautisBundle\Security\Authentication\Registrator\UserRegistratorInterface;
 
@@ -50,7 +51,7 @@ class UserLoader
         }
 
         if (!$this->userConnector) {
-            throw new \Exception("No userConnector set while autoregistration enabled"); //@TODO custom exception
+            throw new ConfigurationException("No userConnector set while autoregistration enabled");
         }
 
         $user = null;
@@ -65,7 +66,7 @@ class UserLoader
         }
 
         if (!$this->userRegistrator) {
-            throw new \Exception("No registrator set while autoregistration enabled"); //@TODO custom exception
+            throw new ConfigurationException("No registrator set while autoregistration enabled");
         }
 
         $username = $this->userRegistrator->registerUser();  //@TODO log registration
