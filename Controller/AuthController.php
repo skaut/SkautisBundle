@@ -23,7 +23,7 @@ class AuthController extends Controller
         $event = new SkautisLoginAttemptEvent();
         $this->get("event_dispatcher")->dispatch(SkautisLoginAttemptEvent::EVENT_NAME, $event);
 
-	    $loginUrl = $this->get('skautis')->getLoginUrl();
+        $loginUrl = $this->get('skautis')->getLoginUrl();
         return $this->redirect($loginUrl);
     }
 
@@ -59,7 +59,7 @@ class AuthController extends Controller
         $event = new SkautisLogoutAttemptEvent();
         $this->get("event_dispatcher")->dispatch(SkautisLogoutAttemptEvent::EVENT_NAME, $event);
 
-	    $logoutUrl = $this->get('skautis')->getLogoutUrl();
+        $logoutUrl = $this->get('skautis')->getLogoutUrl();
         return $this->redirect($logoutUrl);
     }
 
@@ -84,7 +84,7 @@ class AuthController extends Controller
     public function registerAction()
     {
 
-	    $registerUrl = $this->get('skautis')->getRegisterUrl();
+        $registerUrl = $this->get('skautis')->getRegisterUrl();
         return $this->redirect($registerUrl);
     }
 

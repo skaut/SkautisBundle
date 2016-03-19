@@ -7,7 +7,7 @@ use Skautis\Skautis;
 use FOS\UserBundle\Model\UserManager;
 use SkautisBundle\Security\Authentication\Registrator\UserRegistratorInterface;
 
-class FosUserRegistrator implements  UserRegistratorInterface
+class FosUserRegistrator implements UserRegistratorInterface
 {
     const NUMBER_OF_RANDOM_BYTES = 10;
 

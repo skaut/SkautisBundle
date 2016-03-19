@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
  * Class SkautisAuthenticator
  * GuardAuthenticator explained https://symfony.com/doc/master/cookbook/security/guard-authentication.html
  */
-class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements GuardAuthenticatorInterface
+class SkautisAuthenticator extends AbstractGuardAuthenticator //implements GuardAuthenticatorInterface
 {
     const SKAUTIS_LOGIN_ID = "skautis_login_id";
     const SKAUTIS_PERSON_ID = "skautis_person_id";
@@ -99,8 +99,7 @@ class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements Guar
 
             $this->session->set(self::SKAUTIS_LOGIN_ID, $loginId);
             $this->session->set(self::SKAUTIS_PERSON_ID, $personId);
-        }
-        else {
+        } else {
             $personId = $this->session->get(self::SKAUTIS_PERSON_ID);
         }
 
@@ -118,7 +117,6 @@ class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements Guar
 
 
         if (!$user && $this->anonymousSkautLogin) {
-
             $userName = $this->session->get(self::SKAUTIS_USERNAME);
             if ($userName == null) {
                 $userName = $this->skautis->user->UserDetail()->UserName;
@@ -132,7 +130,7 @@ class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements Guar
                 [new SkautisRole()]
             );
         }
-        
+
         return $user;
     }
 

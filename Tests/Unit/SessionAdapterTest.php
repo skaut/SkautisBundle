@@ -14,15 +14,14 @@ class SessionAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testSymfonyAdapter()
     {
-	$symfonySession = new SymfonySession(new MockArraySessionStorage());
-	$adapter = new SymfonyAdapter($symfonySession);
+        $symfonySession = new SymfonySession(new MockArraySessionStorage());
+        $adapter = new SymfonyAdapter($symfonySession);
 
         $name = "asd";
         $data = new \StdClass();
 
         $data->data['user_id'] = 123;
         $data->data['token'] = 'asdqwe';
-
 
 
         $this->assertFalse($adapter->has($name));

@@ -18,7 +18,8 @@ class ConnectionController extends Controller
     /**
      * Propoji uzivatele
      */
-    public function connectAction() {
+    public function connectAction()
+    {
 
         $event = new SkautisPreConnectEvent();
         $this->get("event_dispatcher")->dispatch(SkautisPreConnectEvent::EVENT_NAME, $event);
@@ -45,7 +46,8 @@ class ConnectionController extends Controller
     /**
      * Rozpoji uzivatele
      */
-    public function disconnectAction() {
+    public function disconnectAction()
+    {
 
         $event = new SkautisPreDisconnectEvent();
         $this->get("event_dispatcher")->dispatch(SkautisPreDisconnectEvent::EVENT_NAME, $event);

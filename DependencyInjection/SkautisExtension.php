@@ -22,7 +22,7 @@ class SkautisExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        
+
         $container->setParameter('skautis.app_id', $config['app_id']);
         $container->setParameter('skautis.test_mode', $config['test_mode']);
         $container->setParameter('skautis.profiler', $config['profiler']);
@@ -49,7 +49,6 @@ class SkautisExtension extends Extension
         $loader->load('services.yml');
 
         if ($config['request_cache']) {
-
             $container->register('skautis.doctrine.cache', '%skautis.cache_class%')
                 ->addArgument(new Reference($config['doctrine_cache_provider']))
                 ->addArgument('skautis.doctrine.cache.ttl');

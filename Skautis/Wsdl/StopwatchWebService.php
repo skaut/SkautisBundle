@@ -11,7 +11,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class StopwatchWebService extends WebService
 {
 
-   /**
+    /**
      * Profilovani
      *
      * @var Stopwatch
@@ -32,15 +32,14 @@ class StopwatchWebService extends WebService
     {
         $name = $function_name;
 
-	if (isset($this->counter[$function_name])) {
+        if (isset($this->counter[$function_name])) {
             $name .= ' - ' . $this->counter[$function_name];
             $this->counter[$function_name]++;
+        } else {
+            $this->counter[$function_name] = 0;
         }
-        else {
-	    $this->counter[$function_name] = 0;
-	}
 
-	return $name;
+        return $name;
     }
 
     /**
@@ -57,19 +56,17 @@ class StopwatchWebService extends WebService
     public function call($function_name, array $arguments = [])
     {
         $name = $this->getWatchName($function_name);
-	$this->stopwatch->start($name, "skautis");
+        $this->stopwatch->start($name, "skautis");
 
-	try {
+        try {
             $result = parent::call($function_name, $arguments);
-	}
-	catch (\Exception $e) {
-	    throw $e;
-	}
-	finally {
-	    $this->stopwatch->stop($name);
-	}
+        } catch (\Exception $e) {
+            throw $e;
+        } finally {
+            $this->stopwatch->stop($name);
+        }
 
-	return $result;
+        return $result;
     }
 
 }

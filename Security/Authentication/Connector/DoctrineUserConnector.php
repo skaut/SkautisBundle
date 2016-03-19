@@ -19,14 +19,16 @@ class DoctrineUserConnector implements UserConnectorInterface
      */
     protected $em;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @inheritdoc
      */
-    public function getUsername($personId) {
+    public function getUsername($personId)
+    {
         /**
          * @var DoctrineUserConnection
          */
@@ -42,7 +44,8 @@ class DoctrineUserConnector implements UserConnectorInterface
     /**
      * @inheritdoc
      */
-    public function getPersonId($username) {
+    public function getPersonId($username)
+    {
         $connection = $this->findConnectionByUsername($username);
 
         if (!$connection) {
@@ -55,7 +58,8 @@ class DoctrineUserConnector implements UserConnectorInterface
     /**
      * @inheritdoc
      */
-    public function connect($personId, $username) {
+    public function connect($personId, $username)
+    {
 
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('C')
@@ -82,7 +86,8 @@ class DoctrineUserConnector implements UserConnectorInterface
     /**
      * @inheritdoc
      */
-    public function disconnect($username) {
+    public function disconnect($username)
+    {
         $connection = $this->findConnectionByUsername($username);
 
         if (!$connection) {
@@ -97,7 +102,8 @@ class DoctrineUserConnector implements UserConnectorInterface
      * @param string $username
      * @return DoctrineUserConnection|null
      */
-    protected function findConnectionByUsername($username) {
+    protected function findConnectionByUsername($username)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('C')
             ->from('SkautisBundle\Entity\DoctrineUserConnection', 'C')

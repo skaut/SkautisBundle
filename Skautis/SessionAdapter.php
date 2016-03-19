@@ -43,6 +43,6 @@ class SessionAdapter implements AdapterInterface
      */
     public function get($name)
     {
-	return $this->session->get($name);
+        return $this->session->get($name);
     }
 }

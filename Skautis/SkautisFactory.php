@@ -11,11 +11,11 @@ use Skautis\User;
  */
 class SkautisFactory
 {
-   /**
+    /**
      * Vytvari objek skautisu a vola nastaveni
      *
-     * @param WsdlManager      $wsdlManager
-     * @param bool             $debug
+     * @param WsdlManager $wsdlManager
+     * @param bool $debug
      *
      * @return Skautis
      */
@@ -27,6 +27,6 @@ class SkautisFactory
             $skautis->enableDebugLog();
         }
 
-	    return $skautis;
+        return $skautis;
     }
 }

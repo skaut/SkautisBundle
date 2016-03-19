@@ -40,19 +40,19 @@ class SkautisDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-	    $config = $this->skautis->getConfig();
+        $config = $this->skautis->getConfig();
         $this->data = [
-    	    'queries'           => $this->skautis->getDebugLog(),
-            'app_id'            => $config->getAppId(),
-	        'test_mode'         => $config->isTestMode(),
-	        'cache'             => $config->getCache(),
-	        'compression'       => $config->getCompression(),
-	        'role_id'           => $this->skautis->getUser()->getRoleId(),
-	        'unit_id'           => $this->skautis->getUser()->getUnitId(),
-	        'token'             => $this->skautis->getUser()->getLoginId(),
-	        'is_logged_in'      => $this->skautis->getUser()->isLoggedIn(),
-	        'logout_date'       => $this->skautis->getUser()->getLogoutDate(),
-	        'maintenance'       => $this->skautis->isMaintenance(),
+            'queries' => $this->skautis->getDebugLog(),
+            'app_id' => $config->getAppId(),
+            'test_mode' => $config->isTestMode(),
+            'cache' => $config->getCache(),
+            'compression' => $config->getCompression(),
+            'role_id' => $this->skautis->getUser()->getRoleId(),
+            'unit_id' => $this->skautis->getUser()->getUnitId(),
+            'token' => $this->skautis->getUser()->getLoginId(),
+            'is_logged_in' => $this->skautis->getUser()->isLoggedIn(),
+            'logout_date' => $this->skautis->getUser()->getLogoutDate(),
+            'maintenance' => $this->skautis->isMaintenance(),
         ];
     }
 
@@ -67,7 +67,7 @@ class SkautisDataCollector extends DataCollector
      */
     public function getRequests()
     {
-	    return $this->data['queries'];
+        return $this->data['queries'];
     }
 
     /**
@@ -76,7 +76,7 @@ class SkautisDataCollector extends DataCollector
      */
     public function getRequestCount()
     {
-	    return count($this->data['queries']);
+        return count($this->data['queries']);
     }
 
     /**

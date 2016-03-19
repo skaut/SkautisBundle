@@ -13,7 +13,8 @@ class SkautisExceptionListener
     /**
      * Kontrola zda tento listener obsluhuje dany typ exceptionu
      */
-    protected function supportsException(\Exception $exception) {
+    protected function supportsException(\Exception $exception)
+    {
         return $exception instanceof \Skautis\Exception;
     }
 

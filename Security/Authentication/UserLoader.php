@@ -12,7 +12,7 @@ class UserLoader
     /**
      * @var bool
      */
-    private $enableConnector ;
+    private $enableConnector;
     /**
      * @var UserConnectorInterface
      */

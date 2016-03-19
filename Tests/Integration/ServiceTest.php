@@ -9,8 +9,8 @@ class ServiceTest extends KernelAwareTest
     {
         $skautIS = $this->container->get('skautis');
 
-	$loginUrl = $skautIS->getLoginUrl();
+        $loginUrl = $skautIS->getLoginUrl();
 
-	$this->assertContains('http://', $loginUrl);
+        $this->assertContains('http://', $loginUrl);
     }
 }

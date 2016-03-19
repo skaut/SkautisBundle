@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping AS ORM;
  * @ORM\Entity
  * @ORM\Table(name="skautis_user_connections")
  */
-class DoctrineUserConnection {
+class DoctrineUserConnection
+{
 
     /**
      * Person ID uzivatele Skautisu
@@ -32,28 +33,32 @@ class DoctrineUserConnection {
     /**
      * @param int $id
      */
-    public function setPersonId($id) {
+    public function setPersonId($id)
+    {
         $this->personId = $id;
     }
 
     /**
      * @return int
      */
-    public function getPersonId() {
+    public function getPersonId()
+    {
         return $this->personId;
     }
 
     /**
      * @param string $username
      */
-    public function setUsername($username) {
+    public function setUsername($username)
+    {
         $this->username = $username;
     }
 
     /**
      * @return string
      */
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->username;
     }
 }
