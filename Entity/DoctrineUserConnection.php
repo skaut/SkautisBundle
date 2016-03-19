@@ -2,7 +2,7 @@
 
 namespace SkautisBundle\Entity;
 
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Entita pro ukladani propojeni symfony uzivatele se Skautis uzivatelem
