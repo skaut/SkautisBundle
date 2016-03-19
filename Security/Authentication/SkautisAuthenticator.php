@@ -23,6 +23,7 @@ class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements Guar
 {
     const SKAUTIS_LOGIN_ID = "skautis_login_id";
     const SKAUTIS_PERSON_ID = "skautis_person_id";
+    const SKAUTIS_USERNAME = "skautis_username";
 
     /**
      * @var RouterInterface
@@ -117,16 +118,21 @@ class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements Guar
 
 
         if (!$user && $this->anonymousSkautLogin) {
-            //@TODO cache?
-            $userDetail = $this->skautis->user->UserDetail();
+
+            $userName = $this->session->get(self::SKAUTIS_USERNAME);
+            if ($userName == null) {
+                $userName = $this->skautis->user->UserDetail()->UserName;
+                $this->session->set(self::SKAUTIS_USERNAME, $userName);
+            }
+
             $data = sha1(bin2hex(random_bytes(32)));
             $user = new User(
-                $userDetail->UserName,
+                $userName,
                 "NOPASSS-$data",
                 [new SkautisRole()]
             );
         }
-        \dump($user);
+        
         return $user;
     }
 
