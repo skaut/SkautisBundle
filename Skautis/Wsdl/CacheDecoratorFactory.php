@@ -23,13 +23,13 @@ class CacheDecoratorFactory implements WebServiceFactoryInterface
 
     public function __construct(WebServiceFactoryInterface $webServiceFactory, CacheInterface $cache)
     {
-        $this->serviceFactory = $webServiceFactory;
+        $this->webServiceFactory = $webServiceFactory;
         $this->cache = $cache;
     }
 
     public function createWebService($url, array $options)
     {
-        $webService = $this->serviceFactory->createWebService($url, $options);
+        $webService = $this->webServiceFactory->createWebService($url, $options);
         $webService = new CacheDecorator($webService, $this->cache);
 
         return $webService;
