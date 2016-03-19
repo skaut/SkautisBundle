@@ -15,7 +15,7 @@ class ErrorController extends Controller
      */
     public function errorAction() {
         $response =  $this->render("SkautisBundle:Controller/Error:index.html.twig");
-        $response->setStatusCode(500); //TODO external service error?
+        $response->setStatusCode(500);
 
         return $response;
     }
