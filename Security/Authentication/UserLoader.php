@@ -69,7 +69,7 @@ class UserLoader
             throw new ConfigurationException("No registrator set while autoregistration enabled");
         }
 
-        $username = $this->userRegistrator->registerUser();  //@TODO log registration
+        $username = $this->userRegistrator->registerUser();
         $this->userConnector->connect($personId, $username);
 
         return $userProvider->loadUserByUsername($username);
