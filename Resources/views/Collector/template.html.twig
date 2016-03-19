@@ -3,41 +3,41 @@
 {% import _self as m %}
 
 {% block toolbar %}
-    <div class="sf-toolbar-block">
+    <div class="sf-toolbar-block sf-toolbar-status-normal">
+        <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
         <div class="sf-toolbar-icon">
-            <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
-                <img width="20" height="28" alt="Skautis" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAhCAQAAABkFdNRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wcVCgAzSBybJwAAAEVpVFh0Q29tbWVudAAAAAAAQ1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2ODApLCBxdWFsaXR5ID0gOTAKqozFDgAABcxJREFUOMuVVWtQlFUYfr5vz37f7sousCjscltIUUDxklwqLxmJoeN1yHRMHc3My1jpaOlMN6PInDIzL2OiaICSeIGUBG+JkLd05Q4hyEVBdhd1YWH3Yy/fnn6I2ZRM9f45M+c8z7zP+573OQfoMwz+mVlZ+Sa/vhFMXwf6iOvHOwczbmXDyJnP1zwdwz59uzlEf1DQRaWMTnGGlmXVP4P/Exmbt9Hc1QBw9qPvaPpWKvnPmX8ZZJ6uOqdNA4CQXerizlm/RvxHcv1Y8ztcuCotzgIAYQ/kO3idafmtsf/M/reGNUTr93WFC8TKBhuHfha1E6hYXJ18N1AuylzeLWNW+p3pk2wMKqykGLa31MfymsbVpQxL40j1Qg+LEV6Fw6uqVlI+caRnbR+yy7bYPcbMH7a2w+Yujx8blFv3RtXCgJ8nvCBWdNsiN46f6uCubfsrnjxaflW0jnDGNST2c56LPC41+TmEIuP0WQWFbhL/2lm52wp13qv3dcTZ+NKxL6XnVVcmdP8pu9infr1tJeMUvPgW8JIBdkh/i3g9vt4UITq0ty/qyg/QCQRCA8faQ+RdjEyxe1Dy2PsAC1RzjW92vk1SX0nq3x1XOH6a9xJZngdrlQO+NdrbgFmhkslOKxePmhJ7zrcncZF8u2Vp06pKGQAgMyi1NfUIZYHskoIaACj1zRuX7/24slNe+eOrNQBwqiS7FgC+T09tz9IBBOC03dpnmq/MvxjoJK2DGyeH5o80wfSkLVM6UAQAtZOvRmkbLmxQdAv3q30kOnqHAGp1C9O4RsZysMOJtiTkP31kTQlOSVsY2eSC3W1jVJ4AqgKPGbfQn3Jc0TTAFnttBfXsa95Fzc33DHHUr3N4btY3NNtQHkgMH3b6qjraWKGedB2hGvmF2WeNPZUjWoMdT2iN0ut+NKQgmOirWuY+VFmNvEqw+rV/weQ8JDcc6W0Zntu5dmFtF2d7wHup7D6fD9kTbntErZOXL+jYKKjtD3nvfnbld3aPjjW61WSGdSQRZaQmKTM9out9kfQ7HJoR2NgS2LRS2My00GMMBYDKl43fMsWD9wTVNYS2JRk+YqHaOnVbQRQdR6Q3rWOABZ9k1cs1M3cyFgDV1xuvDHk48+YZWAC9R9l0tyl2XWwFgHJ6Nvuqw5bwI9AVw9eRAbtvZ/zyAZOC/ZQwrkdCo5svl/dom6QAYORcOndZTGOvj2zYBQBFG5uH61awqtwBJ1qTLyRT2WMqUBtAwrl2rQsAApycgQm52f9J+6ii+IvmjwOL1AcBVGvO5aXTXEPp4toYylFJ08Ds4zvo4Xm0166HkrbRwyfuhVNW7Hd7YtmCE+0/0IKTv/v3GuNGbEsBqoi+8l2lwAtWtVMM3jHjQ777cabsj++s5nne7FZ2kaj9rgDXc8FTRl8CWMDI35vm5IPXdLdCDC0Sc/23J0yevfaCTC8HgBuy84o5GybE+32NbE0OA5t54DpRYl5k9gAIUOYtzpSeHKW3hjZLuOJlKQCQM/vBW+Lea0cIDJMNK05mRGfGXAbyV9HZPqWRFT/lCNNKPkU3AWwK6NgDDKV5DQU1n++OZJvcAU0JVn/lDY9jMtij2xKso1Mn7b0rBt2aOyD/xeMAKXXMMHMAAaSsi4gugBFKlpfM6ZnOxvEc8e+BhGfggBsSyNV8oujEfZ9NEXsZK8ASVsYTgAV8BEmr+DJVAqOaF2/BlLB5Xga1S4Weoc1MHXoilVCLXg+Gzpe9OC959B2Aqu3xTIuHFWCBOCO/yzntfJplIADPmGXtR4VRmlXyw7aJI1Tj1cJU6RHtCkvwnaPD1jODKGeJKkwTJim+H2fqvSqL99WUe0ulRO62sQ541QWtijlzelHp7rAMzl25MGLpjEx9YtNXHZEyVkGtjJtqUp/d0N/8l3e74vm7iUwobw28FHaIcQNUsi/PnAiozy+Z2IuYaogX/eXm4BOh+f/62bl99xelXuwc2DfiDxrjg5H06FMBAAAAAElFTkSuQmCC">
-                Skautis
-                <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getRequestCount() }}</span>
-            </a>
+                <img alt="Skautis" src="data:image/png;base64,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">
+                {% if collector.getRequestCount() > 0 %}
+                    <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getRequestCount() }}</span>
+                {% endif %}
         </div>
-        <div class="sf-toolbar-info">
-            <div class="sf-toolbar-info-piece">
-                <b>Pocet pozadavku na server</b>
-                <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getRequestCount() }}</span>
+
+        {% if collector.getRequestCount() > 0 %}
+            <div class="sf-toolbar-info">
+                <div class="sf-toolbar-info-piece">
+                    <b>Pocet pozadavku na server</b>
+                    <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getRequestCount() }}</span>
+                </div>
+                <div class="sf-toolbar-info-piece">
+                    <b>Celkovy cas pozadavku</b>
+                    <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</span>
+                </div>
             </div>
-            <div class="sf-toolbar-info-piece">
-                <b>Celkovy cas pozadavku</b>
-                <span class="sf-toolbar-status sf-toolbar-status-green">{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</span>
-            </div>
-        </div>
+        {% endif %}
+        </a>
     </div>
 {% endblock %}
 
 
-{#{% block head %}#}
-    {# if the web profiler panel needs some specific JS or CSS files #}
-{#{% endblock %}#}
-
-
 {% block menu %}
-    <span class="label">
+    <span class="label label-status-success {% if collector.getRequestCount() == 0 %}disabled{% endif %}">
         <span class="icon"><img src="data:image/png;base64,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" alt="skautis logo" /></span>
         <strong>Skautis</strong>
+        {% if collector.getRequestCount() > 0 %}
         <span class="count">
             <span>{{ collector.getRequestCount() }}</span>
-            <span>{{ collector.getTotalTime() | number_format(2, '.', ',') }}ms</span>
         </span>
+        {% endif %}
     </span>
 {% endblock %}
 
