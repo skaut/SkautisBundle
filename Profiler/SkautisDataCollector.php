@@ -16,6 +16,17 @@ class SkautisDataCollector extends DataCollector
 
     /**
      * @var Skautis
+     *
+     * @method string app_id
+     * @method bool test_mode
+     * @method bool cache
+     * @method bool compression
+     * @method string role_id
+     * @method string unit_id
+     * @method string token
+     * @method bool is_logged_in
+     * @method \DateTime logout_date
+     * @method bool maintenance
      */
     protected $skautis;
 
