@@ -54,7 +54,6 @@ class UserLoader
             throw new ConfigurationException("No userConnector set while autoregistration enabled");
         }
 
-        $user = null;
         $username = $this->userConnector->getUsername($personId);
         if (!empty($username)) {
             return $userProvider->loadUserByUsername($username);
