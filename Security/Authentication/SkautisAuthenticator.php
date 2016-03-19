@@ -115,16 +115,18 @@ class SkautisAuthenticator extends  AbstractGuardAuthenticator //implements Guar
     {
         $user = $this->userLoader->loadUser($credentials['person_id'], $userProvider);
 
+
         if (!$user && $this->anonymousSkautLogin) {
             //@TODO cache?
             $userDetail = $this->skautis->user->UserDetail();
+            $data = sha1(bin2hex(random_bytes(32)));
             $user = new User(
                 $userDetail->UserName,
-                "NOPASSS", //@TODO random
+                "NOPASSS-$data",
                 [new SkautisRole()]
             );
         }
-
+        \dump($user);
         return $user;
     }
 
