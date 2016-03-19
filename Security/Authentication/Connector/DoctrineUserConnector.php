@@ -4,6 +4,8 @@ namespace SkautisBundle\Security\Authentication\Connector;
 
 use Doctrine\ORM\EntityManager;
 use SkautisBundle\Entity\DoctrineUserConnection;
+use SkautisBundle\Exception\UserConnectionNotFound;
+use SkautisBundle\Exception\UserNotFound;
 use SkautisBundle\Security\Authentication\Connector\UserConnectorInterface;
 
 /**
@@ -66,7 +68,7 @@ class DoctrineUserConnector implements UserConnectorInterface
         $result = $queryBuilder->getQuery()->getResult();
 
         if (sizeof($result) > 0) {
-            return; //@TODO exception?
+            throw new UserNotFound("User cannot be connected because user '$username' does not exist!");
         }
 
 
@@ -84,7 +86,7 @@ class DoctrineUserConnector implements UserConnectorInterface
         $connection = $this->findConnectionByUsername($username);
 
         if (!$connection) {
-            return; //@TODO exception?
+            throw new UserConnectionNotFound("User '$username'' cannot be disconnected because he is not connected!");
         }
 
         $this->em->remove($connection);
