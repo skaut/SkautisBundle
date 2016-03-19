@@ -6,7 +6,6 @@ namespace SkautisBundle\Security\Authentication\Registrator;
 use Skautis\Skautis;
 use FOS\UserBundle\Model\UserManager;
 use SkautisBundle\Security\Authentication\Registrator\UserRegistratorInterface;
-use Symfony\Component\Security\Core\Util\SecureRandom;
 
 class FosUserRegistrator implements  UserRegistratorInterface
 {
@@ -58,10 +57,7 @@ class FosUserRegistrator implements  UserRegistratorInterface
      */
     protected function generatePassword()
     {
-        $generator = new SecureRandom();
-        $randomBytes = $generator->nextBytes(self::NUMBER_OF_RANDOM_BYTES);
-
-        return base64_encode($randomBytes);
+        return base64_encode(random_bytes(self::NUMBER_OF_RANDOM_BYTES));
     }
 
 }
