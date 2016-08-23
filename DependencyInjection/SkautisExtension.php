@@ -61,4 +61,3 @@ class SkautisExtension extends Extension
         }
     }
 }
-
