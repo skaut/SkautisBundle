@@ -3,6 +3,8 @@ Symfony ma vlastni authentizacni system, zde se dozvite jak ho propojit se skaut
 Navic vetsine aplikaci nebude stacit pouze uzivatel ze skautisu. Bude vyzadovat lokalni data, napriklad pro mapovani autoru clanku blogu v relacni databazi.
 Authentikace je jedna z neslozitejsich komponent Symfony a zaroven jedna z nejdulezitejsich. Doporucuji precist si o [Symfony Security](http://symfony.com/doc/current/book/security.html)
 
+Bundle pouziva novou komponentu pro authentikaci [Guard](http://symfony.com/doc/current/security/guard_authentication.html)
+
 ##Instalace
 Po nainstalovani bundle je potreba vytvorit a nakonfigurovat novy firewall.
 ```yaml
@@ -16,17 +18,19 @@ security:
             security: false
 
         skautis_secured:
+            guard:
+                authenticators:
+                    - skautis.authenticator
             pattern:   ^/
             anonymous: true
             stateless: true
-            skautis:
-                autoregister: true
-                confirm_auth: false
             logout:
               success_handler: skautis.security_authentication.skautis_logout_handler
 
     access_control:
+        - { path: ^/secured, roles: ROLE_SKAUTIS }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
 ```
         
 ##Prihlaseni uzivatele
