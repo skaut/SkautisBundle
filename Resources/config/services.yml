@@ -42,7 +42,7 @@ services:
         class: 'SkautisBundle\Skautis\SkautisFactory'
 
     skautis:
-        class: "Skautis\Skautis"
+        class: 'Skautis\Skautis'
         factory: ["@skautis.skautis_factory", 'createSkautis']
         arguments:
             - "@skautis.wsdl_manager"
