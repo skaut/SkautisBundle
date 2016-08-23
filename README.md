@@ -25,8 +25,10 @@ $userDetail = $this->get('skautis')->user->UserDetail();
 $personId = $userDetail->Person_Id;
 ```
 
-##Profiler
-//@TODO images
+###Integrace s debugovacimi nastroji
+![Stopwatch profiler](docs/img/skautis_profiler.png)
+Dalsi screenshoty integrace vcetne popisu najdete v [dokumentaci](docs/images.md)
+
 
 ##Instalace a použití
 Podrobný návod na instalaci a použití najdete v [dokumentaci](docs/README.md)
