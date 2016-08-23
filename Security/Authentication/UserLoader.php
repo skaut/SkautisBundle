@@ -6,7 +6,11 @@ namespace SkautisBundle\Security\Authentication;
 use SkautisBundle\Exception\ConfigurationException;
 use SkautisBundle\Security\Authentication\Connector\UserConnectorInterface;
 use SkautisBundle\Security\Authentication\Registrator\UserRegistratorInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ *  Facade class responsible for user management.
+ */
 class UserLoader
 {
     /**
@@ -44,7 +48,15 @@ class UserLoader
     }
 
 
-    public function loadUser($personId, $userProvider)
+    /**
+     * Loads user based on $personId
+     *
+     * @param string $personId Id of person from Skautis
+     * @param UserProviderInterface $userProvider
+     * @return null|\Symfony\Component\Security\Core\User\UserInterface
+     * @throws ConfigurationException
+     */
+    public function loadUser($personId, UserProviderInterface $userProvider)
     {
         if (!$this->enableConnector) {
             return null;
