@@ -38,7 +38,7 @@ Minimální verze PHP se shoduje s verzí PHP na [lebeda.skauting.cz](http://leb
 Tento Bundle nemá stejné čísla verzí jako hlavní knihovna. Důvod je ten že při každé změně minimálních závislostí se mění major verze v soukadu se [sémantickým verzováním](http://semver.org/)
 
 Abyste předešli problémům s verzovaním doporučuji pečlivě volit verze požadované v composer.json.
-* Pro aplikace v produkčním nasazení **použijte "1.0.*" nebo "~1.0"**
-* Při vývoji můžete použít například toto "1.x@dev" což vám zaručí nejnovější code z major verze 1
+* Pro aplikace v produkčním nasazení **použijte "1.0.*" nebo "^1.0"**
+* Při vývoji můžete použít například toto "1.-dev" což vám zaručí nejnovější code z major verze 1
 
 
