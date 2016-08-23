@@ -118,7 +118,7 @@ class SkautisAuthenticator extends AbstractGuardAuthenticator //implements Guard
 
         if (!$user && $this->anonymousSkautLogin) {
             $userName = $this->session->get(self::SKAUTIS_USERNAME);
-            if ($userName == null) {
+            if (empty($userName)) {
                 $userName = $this->skautis->user->UserDetail()->UserName;
                 $this->session->set(self::SKAUTIS_USERNAME, $userName);
             }
