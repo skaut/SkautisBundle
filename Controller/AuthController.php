@@ -2,10 +2,10 @@
 
 namespace SkautisBundle\Controller;
 
-use SkautisBundle\EventDispatcher\Event\SkautisLoginAttemptEvent;
-use SkautisBundle\EventDispatcher\Event\SkautisLoginSuccessEvent;
-use SkautisBundle\EventDispatcher\Event\SkautisLogoutAttemptEvent;
-use SkautisBundle\EventDispatcher\Event\SkautisLogoutSuccessEvent;
+use SkautisBundle\EventDispatcher\Event\LoginAttemptEvent;
+use SkautisBundle\EventDispatcher\Event\LoginSuccessEvent;
+use SkautisBundle\EventDispatcher\Event\LogoutAttemptEvent;
+use SkautisBundle\EventDispatcher\Event\LogoutSuccessEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,8 +20,8 @@ class AuthController extends Controller
      */
     public function loginAction()
     {
-        $event = new SkautisLoginAttemptEvent();
-        $this->get("event_dispatcher")->dispatch(SkautisLoginAttemptEvent::EVENT_NAME, $event);
+        $event = new LoginAttemptEvent();
+        $this->get("event_dispatcher")->dispatch(LoginAttemptEvent::EVENT_NAME, $event);
 
         $loginUrl = $this->get('skautis')->getLoginUrl();
         return $this->redirect($loginUrl);
@@ -41,8 +41,8 @@ class AuthController extends Controller
             return $this->redirect($skautis->getLoginUrl());
         }
 
-        $event = new SkautisLoginSuccessEvent();
-        $this->get("event_dispatcher")->dispatch(SkautisLoginSuccessEvent::EVENT_NAME, $event);
+        $event = new LoginSuccessEvent();
+        $this->get("event_dispatcher")->dispatch(LoginSuccessEvent::EVENT_NAME, $event);
 
         $this->addFlash('notice', 'Byl/a jste prihlasena');
 
@@ -56,8 +56,8 @@ class AuthController extends Controller
     public function logoutAction()
     {
 
-        $event = new SkautisLogoutAttemptEvent();
-        $this->get("event_dispatcher")->dispatch(SkautisLogoutAttemptEvent::EVENT_NAME, $event);
+        $event = new LogoutAttemptEvent();
+        $this->get("event_dispatcher")->dispatch(LogoutAttemptEvent::EVENT_NAME, $event);
 
         $logoutUrl = $this->get('skautis')->getLogoutUrl();
         return $this->redirect($logoutUrl);
@@ -71,8 +71,8 @@ class AuthController extends Controller
         $this->get('session')->invalidate();
         $this->addFlash('notice', 'Byl/a jste odhlasena');
 
-        $event = new SkautisLogoutSuccessEvent();
-        $this->get("event_dispatcher")->dispatch(SkautisLogoutSuccessEvent::EVENT_NAME, $event);
+        $event = new LogoutSuccessEvent();
+        $this->get("event_dispatcher")->dispatch(LogoutSuccessEvent::EVENT_NAME, $event);
 
         $redirectRoute = $this->container->getParameter('skautis.after_logout_redirect');
         return $this->redirectToRoute($redirectRoute);
