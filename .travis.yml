@@ -17,6 +17,7 @@ matrix:
 
 before_install:
   - composer self-update
+  - composer global require hirak/prestissimo 0.3.4
 
 install:
   - composer install --dev --prefer-dist --no-autoloader  --no-scripts
