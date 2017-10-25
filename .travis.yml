@@ -2,7 +2,7 @@ language: php
 
 ## Run on container environment
 sudo: false
-dist: trusty
+dist: precise
 
 php:
   - 5.6
