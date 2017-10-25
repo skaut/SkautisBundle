@@ -24,7 +24,7 @@ install:
   - composer install --dev --prefer-dist --no-autoloader  --no-scripts
   - composer dump-autoload -o -a --no-scripts
 
-script: ./vendor/bin/phpunit --coverage-clover=coverage.clover
+script: phpunit --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
