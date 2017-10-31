@@ -33,5 +33,6 @@ after_script:
 
 cache:
   directories:
-    - vendor
     - $HOME/.composer/cache
+    - $HOME/.config/composer
+    - $HOME/.cache/composer
